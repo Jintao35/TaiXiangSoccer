@@ -1,0 +1,27 @@
+<!-- 6_1_2比赛结果选择MVP队员页面 -->
+<view class="page__bd">
+  <view class="page-section">
+    <view class="page-section-title">本场MVP，已选{{players}}/{{max}}人</view>
+    <view class="weui-cells weui-cells_after-title">
+      <checkbox-group bindchange="bindPlayerChange">
+        <scroll-view class="scroll" scroll-y="true">
+          <label class="weui-cell weui-check__label" wx:for="{{lstPlayer}}" wx:key="index">
+            <view class="weui-cell__hd">
+              <image class="pic" src="{{item.pic}}" />
+            </view>
+            <view class="weui-cell__bd">
+              {{item.no}}.{{item.name}} {{item.positions}}
+            </view>
+            <view class="weui-cell__ft">
+              <checkbox value="{{item._id}}" checked="{{item.checked}}" />
+            </view>
+          </label>
+        </scroll-view>
+      </checkbox-group>
+    </view>
+  </view>
+  <view class="btn-sp-area">
+    <button type="warn" size="mini" class="btn-sp" bindtap="bindClear">全清</button>
+    <button type="primary" size="mini" class="btn-sp" bindtap="bindSave">确定</button>
+  </view>
+</view>

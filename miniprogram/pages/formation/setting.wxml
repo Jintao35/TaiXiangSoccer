@@ -1,0 +1,42 @@
+<!-- 13阵容设定页面 -->
+<tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="positions">
+  <image class="park" src="https://wx1.sinaimg.cn/large/008nJrvKly1guqiuu7d26j61i61buh1u02.jpg">
+  </image>
+  <view class="row" wx:for="{{quarterlist[tabIndex].squadlist}}" wx:for-item="row" wx:key="index">
+    <view class="cell" wx:for="{{row.lstCell}}" wx:for-item="cell" wx:key="index">
+      <view wx:if="{{cell.checked}}" class="position checked" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}"
+        bindtap="bindPositionClick">
+        <text>{{cell.name}}</text>
+      </view>
+      <view wx:else class="position" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}"
+        bindtap="bindPositionClick">
+        <text>{{cell.name}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<picker-view indicator-style="height: 48px;" class="picker" bindchange="bindPickerChange" value="{{pkrValue}}">
+  <picker-view-column bindtouchend="" bindchange="bindPickerChange">
+    <view wx:for="{{cboPlayer}}" wx:key="value" style="line-height: 50px;text-align: center;">
+      {{item.name}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{cboDefend}}" wx:key="value" style="line-height: 50px;text-align: center;">
+      {{item.name}}</view>
+  </picker-view-column>
+  <picker-view-column>
+    <view wx:for="{{cboSquad}}" wx:key="item" style="line-height: 50px;text-align: center;">{{item}}
+    </view>
+  </picker-view-column>
+</picker-view>
+<view class="btn-sp-area">
+  <button type="default" size="mini" class="btn-sp" bindtap="bindAddClass">
+    <mp-icon icon="add" type="outline" color="#06ae56" size="18"></mp-icon>
+  </button>
+  <button type="default" size="mini" class="btn-sp" bindtap="bindDelClass">
+    <mp-icon icon="delete" type="outline" color="red" size="18"></mp-icon>
+  </button>
+  <button type="default" size="mini" class="btn-sp" bindtap="bindReset">重置</button>
+  <button type="primary" size="mini" class="btn-sp" bindtap="submitForm">确定</button>
+</view>

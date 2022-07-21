@@ -1,0 +1,104 @@
+<!-- 3_3队员信息 -->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-form id="form" rules="{{rules}}" models="{{player}}">
+      <mp-cells title="个人信息">
+        <mp-cell show-error prop="name" title="姓名" ext-class="">
+          <input bindinput="formInputChange" data-field="name" class="weui-input" maxlength="20" placeholder="请输入姓名"
+            value="{{player.name}}" />
+        </mp-cell>
+        <mp-cell show-error prop="sex" title="性别" ext-class="weui-cell_vcode">
+          <view class="weui-cell_switch">
+            女
+            <switch data-field="sex" checked="{{player.sex}}" bindchange="bindSwitchChange" /> 男
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="foot" title="惯用脚" ext-class="weui-cell_vcode">
+          <view class="weui-cell_switch">
+            左脚
+            <switch data-field="foot" checked="{{player.foot}}" bindchange="bindSwitchChange" /> 右脚
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="birthday" title="生日" ext-class="">
+          <picker data-field="birthday" mode="date" value="{{strBirthday}}" start="1970-01-01" end="2030-01-01"
+            bindchange="bindDateChange">
+            <view class="weui-input">{{strBirthday}}</view>
+          </picker>
+        </mp-cell>
+        <mp-cell show-error prop="height" title="身高" ext-class="">
+          <input bindinput="formInputChange" data-field="height" class="weui-input" type="number" maxlength="3"
+            placeholder="请输入身高，单位cm" value="{{player.height}}" />
+        </mp-cell>
+        <mp-cell show-error prop="weight" title="体重" ext-class="">
+          <input bindinput="formInputChange" data-field="weight" class="weui-input" type="number" maxlength="3"
+            placeholder="请输入体重，单位kg" value="{{player.weight}}" />
+        </mp-cell>
+        <mp-cell show-error prop="pic" title="头像" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before">
+            <input bindinput="formInputChange" data-field="pic" class="weui-input" maxlength="128"
+              placeholder="微博gif格式图片路径" value="{{player.pic}}" />
+          </view>
+          <view slot="footer" class="weui-vcode-img" style="background:rgba(0, 192, 255, 0.6);">
+            <image style="width:56px;height:56px" src="{{player.pic}}" />
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="memo" title="备注说明" ext-class="">
+          <input bindinput="formInputChange" data-field="memo" class="weui-input" placeholder="请输入备注说明文字"
+            value="{{player.memo}}" />
+        </mp-cell>
+      </mp-cells>
+      <mp-cells title="入队信息">
+        <mp-cell show-error prop="disabled" title="球队生涯" ext-class="weui-cell_vcode">
+          <view class="weui-cell_switch">
+            现役
+            <switch data-field="disabled" checked="{{player.disabled}}" bindchange="bindSwitchChange" /> 退役
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="joinday" title="入队日期" ext-class="">
+          <picker data-field="joinday" mode="date" value="{{strJoinday}}" start="2000-01-01" end="2099-12-31"
+            bindchange="bindDateChange">
+            <view class="weui-input">{{strJoinday}}</view>
+          </picker>
+        </mp-cell>
+        <mp-cell wx:if="{{player.disabled==1}}" show-error prop="leaveday" title="离队日期" ext-class="">
+          <picker data-field="leaveday" mode="date" value="{{strLeaveday}}" start="2021-01-01" end="2099-12-31"
+            bindchange="bindDateChange">
+            <view class="weui-input">{{strLeaveday}}</view>
+          </picker>
+        </mp-cell>
+        <mp-cell show-error prop="stadium" title="球衣号码" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before">
+            <input bindinput="formInputChange" data-field="no" class="weui-input" type="number" maxlength="2"
+              placeholder="请输入球衣号码" value="{{player.no}}" />
+          </view>
+          <view slot="footer" class="weui-vcode-btn">
+            <navigator url="number">选择</navigator>
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="org" title="队员编制" ext-class="">
+          <picker bindchange="bindPickerChange" data-field="org" value="{{player.org}}" range="{{lstOrg}}">
+            {{lstOrg[player.org]}}
+          </picker>
+        </mp-cell>
+        <mp-cell show-error prop="role" title="职位职务" ext-class="">
+          <picker bindchange="bindPickerChange" data-field="role" value="{{player.role}}" range="{{lstRole}}">
+            {{lstRole[player.role]}}
+          </picker>
+        </mp-cell>
+      </mp-cells>
+      <mp-cells title="擅长位置">
+        <mp-checkbox-group prop="checkbox" multi="true" bindchange="bindPositionChange">
+          <mp-checkbox wx:for="{{lstPosition}}" wx:key="value" label="{{item.value}} {{item.name}}"
+            value="{{item.value}}" checked="{{item.checked}}"></mp-checkbox>
+        </mp-checkbox-group>
+      </mp-cells>
+    </mp-form>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submitForm">保存</button>
+    </view>
+  </view>
+</view>
+<mp-dialog title="保存成功" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <icon class="icon-box-img" type="success" size="64"></icon>
+</mp-dialog>

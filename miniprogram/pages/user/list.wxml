@@ -1,0 +1,59 @@
+<!-- 2_1用户管理 -->
+<mp-toptips msg="{{error}}" type="error" show="{{showTopTips}}"></mp-toptips>
+<tabBar tabBar='{{tabBar}}' bind:switch_tabBar='bindSwitchTabBar'></tabBar>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <block wx:if="{{tabIndex === 0}}">
+      <view class="user_list">
+        <mp-cells title="未审核用户列表">
+          <scroll-view class="scroll1" scroll-y="true">
+            <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="bindWaitUserChange">
+              <mp-checkbox wx:for="{{lstWaitUser}}" wx:key="index"
+                label="{{item.name}} {{item.birthday}} {{item.height}}cm/{{item.weight}}kg" value="{{item._id}}"
+                checked="{{item.checked}}"></mp-checkbox>
+            </mp-checkbox-group>
+          </scroll-view>
+        </mp-cells>
+        <view class="weui-cells__title">队员列表</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view class="weui-cell weui-cell_select">
+            <view class="weui-cell__hd weui-cell__hd_in-select-after">
+              <view class="weui-label">选择队员</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker bindchange="bindPlayerChange" value="{{lstPlayerIndex}}" range="{{lstActivePlayer}}"
+                range-key="name">
+                <view class="weui-select">
+                  {{lstActivePlayer[lstPlayerIndex].no}}.{{lstActivePlayer[lstPlayerIndex].name}}
+                  {{lstActivePlayer[lstPlayerIndex].positions}}</view>
+              </picker>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="btn-sp-area">
+        <button type="primary" size="mini" class="btn-sp" bindtap="setPlayer">关联队员</button>
+        <button type="default" size="mini" class="btn-sp" bindtap="addPlayer">生成队员</button>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="user_list">
+        <mp-cells title="已审核用户列表">
+          <scroll-view class="scroll2" scroll-y="true">
+            <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="bindBindUserChange">
+              <mp-checkbox wx:for="{{lstBindUser}}" wx:key="index"
+                label="{{item.name}} {{item.birthday}} ∈ {{item.playerNo}}.{{item.playerName}}" value="{{item._id}}"
+                checked="{{item.checked}}"></mp-checkbox>
+            </mp-checkbox-group>
+          </scroll-view>
+        </mp-cells>
+      </view>
+      <view class="btn-sp-area">
+        <button type="warn" size="mini" class="btn-sp" bindtap="removePlayer">解除关联</button>
+      </view>
+    </block>
+  </view>
+</view>
+<mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <view>保存成功，是否留在此页面？</view>
+</mp-dialog>

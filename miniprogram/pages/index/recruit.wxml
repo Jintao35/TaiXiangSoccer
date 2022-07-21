@@ -1,0 +1,53 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="weui-msg">
+      <view class="weui-msg__title" slot="desc">
+        招贤纳士
+      </view>
+    </view>
+  </view>
+  <view class="page__bd">
+    <view>
+      球队招募公告：
+    </view>
+    <view>
+      1.性别男，年龄25-35，常居大连。
+    </view>
+    <view>
+      2.⌚每周三、周六/日下午踢球。
+    </view>
+    <view>
+      3.亚细亚球场（11人制）
+    </view>
+    <view>
+      八五新星室外球场（9人制）
+    </view>
+    <view>
+      八五新星室内球场（9人制）
+    </view>
+    <view>
+      超赞室内球场（8人制）
+    </view>
+  </view>
+  <view>
+    4.无赞助，场地费和水均AA。
+  </view>
+  <view>
+    5.能保证出勤率。
+  </view>
+  <view>
+    6.位置都可。
+  </view>
+  <view>
+    7.不叽歪，脾气好。
+  </view>
+  <view>
+    -----上述条件若都满足，欢迎打扰-----
+  </view>
+  <view>
+    微信：xinde-kaishi-lei（张领队）
+  </view>
+  <view>
+    微信：h1leehong（牛主管）
+  </view>
+</view>

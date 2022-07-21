@@ -1,0 +1,152 @@
+/* pages/squad/formation.wxss */
+/* 场地图片区 */
+.formation {
+  height: 60vh;
+}
+
+/* 队员信息区 */
+.information {
+  height: 20vh;
+}
+
+/* 场地图片 */
+.park {
+  position: fixed;
+  z-index: -1;
+  width: 100vw;
+  height: 62vh;
+  background-size: cover;
+}
+
+/* 横向对齐层 */
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+/* 占位层 */
+.cell {
+  width: 20vw;
+  position: relative;
+  height: 8vh;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
+
+/* 位置 */
+.position {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  background: rgba(192, 192, 192, 0.3);
+  color: rgba(0, 0, 0, 0.4);
+  border-radius: 18px;
+  text-align: center;
+  margin: 1vh;
+  height: 8vh;
+  line-height: 8vh;
+  width: -webkit-fill-available;
+}
+
+/* 位置 */
+.selected {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 1);
+  border-radius: 18px;
+  text-align: center;
+  margin: 1vh;
+  height: 8vh;
+  line-height: 8vh;
+  width: -webkit-fill-available;
+}
+
+/* 队员 */
+.player {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.0);
+  border-radius: 18px;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  margin: 1vh;
+  height: 8vh;
+  width: -webkit-fill-available;
+}
+
+/* 文本 */
+.field {
+  position: absolute;
+  display: flex;
+  float: left;
+  z-index: 50;
+  color: white;
+  text-align: center;
+  top: 4em;
+  width: 20vw;
+  font-size: 15px;
+}
+
+.field-rating {
+  width: 2.75vh;
+  color: white;
+}
+
+.field-name {
+  width: 7.25vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.weui-grid {
+  text-align: center;
+  padding: 10px 10px;
+  background-color: white;
+}
+
+.row0 {
+  background-color: rgba(192, 255, 255, 0.4);
+}
+
+.polor9 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.polor8 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.polor7 {
+  background: rgba(12, 133, 57, 0.6) !important;
+}
+
+.polor6 {
+  background: rgba(102, 168, 15, 0.7) !important;
+}
+
+.polor5 {
+  background: rgba(230, 182, 0, 0.7) !important;
+}
+
+.polor4 {
+  background: rgba(217, 92, 15, 0.7) !important;
+}
+
+.polor3 {
+  background: rgba(201, 42, 42, 0.8) !important;
+}
+
+.polor2 {
+  background: rgba(201, 42, 42, 0.6) !important;
+}
+
+.polor1 {
+  background: rgba(201, 42, 42, 0.4) !important;
+}
+
+.polor0 {
+  background: rgba(201, 42, 42, 0.2) !important;
+}

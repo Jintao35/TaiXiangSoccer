@@ -1,0 +1,15 @@
+/* pages/match/players.wxss */
+.scroll {
+  height: 86vh;
+}
+
+.weui-cell {
+  padding: 4px;
+}
+
+/* 头像 */
+.pic {
+  z-index: -1;
+  width: 6vh;
+  height: 6vh;
+}

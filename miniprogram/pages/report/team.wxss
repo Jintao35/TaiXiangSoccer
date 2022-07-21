@@ -1,0 +1,5 @@
+/* pages/report/team.wxss */
+.weui-grid {
+  padding: 10px;
+  width: 25%;
+}

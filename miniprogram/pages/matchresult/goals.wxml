@@ -1,0 +1,30 @@
+<!-- 6_1_1比赛结果选择进球/助攻队员页面 -->
+<view class="page__hd">
+  <view class="page__title">{{strTitle}}队员，合计{{strTitle}}数{{sum}}</view>
+</view>
+<view class="page__bd">
+  <scroll-view class="scroll" scroll-y="true">
+    <mp-cells>
+      <block wx:for="{{lstPlayer}}" wx:key="index">
+        <mp-cell data-item="{{item}}">
+          <view class="weui-cell weui-cell_example">
+            <view class="weui-cell__hd">
+              <image class="pic" src="{{item.pic}}" />
+            </view>
+            <view class="weui-cell__bd">{{item.no}}.{{item.name}}</view>
+            <view class="weui-cell__ft">
+              <slider class="slider" data-playerid="{{item._id}}" bindchange="bindCountChange" min="0" max="6" step="1"
+                value="{{item.count}}" show-value="true" />
+            </view>
+          </view>
+        </mp-cell>
+      </block>
+    </mp-cells>
+  </scroll-view>
+  <view class="weui-btn-area">
+    <view class="button-sp-area">
+      <button type="warn" size="mini" class="mini-btn" bindtap="bindClear">全清</button>
+      <button type="primary" size="mini" class="mini-btn" bindtap="bindSave">确定</button>
+    </view>
+  </view>
+</view>

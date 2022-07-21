@@ -1,0 +1,37 @@
+<!-- 3_4球衣号码详情 -->
+<tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__title">选择号码：{{no}}</view>
+  <view class="table">
+    <block wx:if="{{tabIndex===0}}">
+      <scroll-view class="table" scroll-y="true">
+        <view wx:for="{{lstEmpty}}" wx:for-item="row" wx:key="rowIndex" class="row">
+          <block wx:for="{{row}}" wx:for-item="cell" wx:key="cellIndex">
+            <view wx:if="{{cell.checked}}" data-row="{{cell.row}}" data-cell="{{cell.cell}}" bindtap="bindClick"
+              class="cell checked">
+              {{cell.no}}
+            </view>
+            <view wx:else data-row="{{cell.row}}" data-cell="{{cell.cell}}" bindtap="bindClick" class="cell">
+              {{cell.no}}
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </block>
+    <block wx:else>
+      <scroll-view class="table" scroll-y="true">
+        <view class="weui-grids">
+          <block wx:for="{{lstExisting}}" wx:for-item="item" wx:key="index">
+            <view class="weui-grid">{{item.cell}}</view>
+            <view class="weui-grid">{{item.cell1}}</view>
+            <view class="weui-grid">{{item.cell2}}</view>
+          </block>
+        </view>
+      </scroll-view>
+    </block>
+  </view>
+</view>
+<view class="btn-sp-area">
+  <button type="default" size="mini" class="btn-sp" bindtap="bindBack">返回</button>
+  <button type="primary" size="mini" class="btn-sp" bindtap="bindOk">确定</button>
+</view>

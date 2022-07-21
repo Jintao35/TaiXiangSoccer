@@ -1,0 +1,124 @@
+<!-- 13阵容页面 -->
+<tabBar id="tabBar" tabBar='{{lstTab}}' data-index='{{tabIndex}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <block wx:if="{{tabIndex===0}}">
+      <view class="formation">
+        <image class="park" src="https://wx1.sinaimg.cn/large/008nJrvKly1guqiuu7d26j61i61buh1u02.jpg">
+        </image>
+        <block wx:if="{{fifa}}">
+          <view class="row" wx:for="{{squadlist}}" wx:for-item="row" wx:key="index">
+            <view class="cell" wx:for="{{row.lstCell}}" wx:for-item="cell" wx:key="index">
+              <view class="selected polor{{cell.value/10}}" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" data-playerid="{{cell.fifa.player._id}}" bindtap="bindPositionClick">
+                <view style="line-height: 3.5vh;">{{cell.name}}</view>
+                <view style="line-height: 3.5vh;">{{cell.value}}</view>
+              </view>
+              <block wx:if="{{cell.fifa}}">
+                <view class="field">
+                  <view class="field-rating polor{{cell.rating/10}}">{{cell.rating}}</view>
+                  <veiw class="field-name">{{cell.fifa.player.name}}</veiw>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="row" wx:for="{{squadlist}}" wx:for-item="row" wx:key="index">
+            <view class="cell" wx:for="{{row.lstCell}}" wx:for-item="cell" wx:key="index">
+              <block wx:if="{{cell.fifa}}">
+                <view class="player" data-position="{{cell.name}}" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" data-playerid="{{cell.fifa.player._id}}" style="background-image: url({{cell.fifa.player.pic}})" bindtap="bindPositionClick">
+                </view>
+                <view class="field">
+                  <view class="field-rating polor{{cell.rating/10}}">{{cell.rating}}</view>
+                  <veiw class="field-name">{{cell.fifa.player.name}}</veiw>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="position" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" bindtap="bindPositionClick">
+                  <text>{{cell.name}}</text>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+      <mp-cells title="当前选中队员 {{fifa.player.no}} {{fifa.player.name}}">
+        <view class="information">
+          <view wx:if="{{alternate}}" class="weui-grids">
+            <scroll-view class="tbody" scroll-x="true" scroll-y="true">
+              <block wx:for="{{alternate.lstThead}}" wx:for-item="thead" wx:key="index">
+                <view wx:if="{{thead==='队员'}}" class="weui-grid weui-grid-40">队员</view>
+                <view wx:else class="weui-grid weui-grid-20">{{thead}}</view>
+              </block>
+              <block wx:for="{{alternate.lstTbody}}" wx:for-item="tbody" wx:key="index">
+                <view class="weui-grid weui-grid-20">{{fifa.pac}} 速</view>
+                <view class="weui-grid weui-grid-20">{{fifa.sho}} 射</view>
+                <view class="weui-grid weui-grid-20">{{fifa.pas}} 传</view>
+                <view class="weui-grid weui-grid-20">{{fifa.position}}</view>
+                <view class="weui-grid weui-grid-20 bold">{{fifa.overallRating}}</view>
+                <view class="weui-grid weui-grid-20">{{fifa.dri}} 带</view>
+                <view class="weui-grid weui-grid-20">{{fifa.def}} 防</view>
+                <view class="weui-grid weui-grid-20">{{fifa.phy}} 力</view>
+              </block>
+            </scroll-view>
+          </view>
+        </view>
+      </mp-cells>
+      <view class="btn-sp-area">
+        <button type="warn" size="mini" class="btn-sp" bindtap="bindClearClick">全清</button>
+        <button type="default" size="mini" class="btn-sp" bindtap="bindResetClick">重置</button>
+        <button type="primary" size="mini" class="btn-sp" bindtap="submitForm">保存</button>
+      </view>
+    </block>
+    <block wx:elif="{{tabIndex===1}}">
+      <view class="weui-grids">
+        <view class="weui-grid weui-grid-40 bold {{sortField==='index'?'sort':''}}" data-field="index" bindtap="bindTheadClick">
+          队员<block wx:if="{{sortField==='index'}}">↑</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='pac'?'sort':''}}" data-field="pac" bindtap="bindTheadClick">
+          速度<block wx:if="{{sortField==='pac'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='sho'?'sort':''}}" data-field="sho" bindtap="bindTheadClick">
+          射门<block wx:if="{{sortField==='sho'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='pas'?'sort':''}}" data-field="pas" bindtap="bindTheadClick">
+          传球<block wx:if="{{sortField==='pas'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='position'?'sort':''}}" data-field="position" bindtap="bindTheadClick">
+          位置<block wx:if="{{sortField==='position'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='overallRating'?'sort':''}}" data-field="overallRating" bindtap="bindTheadClick">
+          能力<block wx:if="{{sortField==='overallRating'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='dri'?'sort':''}}" data-field="dri" bindtap="bindTheadClick">
+          盘带<block wx:if="{{sortField==='dri'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='def'?'sort':''}}" data-field="def" bindtap="bindTheadClick">
+          防守<block wx:if="{{sortField==='def'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='phy'?'sort':''}}" data-field="phy" bindtap="bindTheadClick">
+          力量<block wx:if="{{sortField==='phy'}}">↓</block>
+        </view>
+        <view wx:for="{{sofifa.fifalist}}" wx:for-item="item" wx:key="index" data-item="{{item}}" bindtap="bindFifaClick">
+          <view class="weui-grid weui-grid-40 {{index%2===0?'row0':''}}">{{item.player.no}}.{{item.player.name}}</view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='pac'?'sort':''}}">{{item.pac}}
+          </view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='sho'?'sort':''}}">{{item.sho}}
+          </view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='pas'?'sort':''}}">{{item.pas}}
+          </view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='position'?'sort':''}}">
+            {{item.position}}</view>
+          <view class="weui-grid weui-grid-20 bold {{index%2===0?'row0':''}} {{sortField==='overallRating'?'sort':''}}">
+            {{item.overallRating}}</view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='dri'?'sort':''}}">{{item.dri}}
+          </view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='def'?'sort':''}}">{{item.def}}
+          </view>
+          <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='phy'?'sort':''}}">{{item.phy}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

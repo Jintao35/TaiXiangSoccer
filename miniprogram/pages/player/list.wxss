@@ -1,0 +1,33 @@
+/* pages/player/list.wxss */
+.list-title {
+  position: relative;
+  margin-right: 10px;
+}
+
+/* 头像 */
+.pic {
+  z-index: -1;
+  width: 8vh;
+  height: 8vh;
+}
+/* 大头像 */
+.bigPic {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell-title {
+  font-size: 20px;
+}
+
+.cell-memo {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #888888;
+}
+
+.cell-badge {
+  position: absolute;
+  top: 4em;
+  left: 3.5em;
+}

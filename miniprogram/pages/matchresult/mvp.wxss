@@ -1,0 +1,30 @@
+/* pages/match/goals.wxss */
+.weui-cell {
+  padding: 0px;
+}
+
+/* 头像 */
+.pic {
+  z-index: -1;
+  width: 6vh;
+  height: 6vh;
+}
+
+.slider {
+  width: 40vw;
+  margin-right: 6vw; 
+}
+
+.button-sp-area {
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mini-btn {
+  margin-right: 10rpx;
+}
+
+.scroll {
+  height: 80vh;
+}

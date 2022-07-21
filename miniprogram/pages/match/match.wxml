@@ -1,0 +1,143 @@
+<!-- 4_2发布比赛 -->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-form id="form" rules="{{rules}}" models="{{match}}">
+      <mp-cells title="比赛信息" footer="">
+        <mp-cell show-error prop="competition" title="比赛类型" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before">
+            <input bindinput="formInputChange" data-field="competition" placeholder="请输入比赛类型" value="{{match.competition}}"
+              class="weui-input" />
+          </view>
+          <view slot="footer" class="weui-vcode-btn">
+            <picker bindchange="bindCompetitionChange" data-field="competition" value="{{competitionIndex}}" range="{{lstCompetition}}">
+              选择
+            </picker>
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="date" title="比赛日期" ext-class="">
+          <picker bindchange="bindDateChange" data-field="date" mode="date" value="{{dtpDate}}" start="2021-01-01"
+            end="2099-12-31">
+            <view class="weui-input">{{strDate}}</view>
+          </picker>
+        </mp-cell>
+        <mp-cell show-error prop="time" title="比赛时间" ext-class="">
+          <picker bindchange="bindTimeChange" data-field="time" mode="time" value="{{strTime}}" start="06:00"
+            end="22:00" class="time">
+            <view class="weui-input">{{strTime}}</view>
+          </picker>
+        </mp-cell>
+        <mp-cell show-error prop="duration" title="比赛时长" ext-class="">
+          <slider bindchange="bindSliderChange" data-field="duration" min="60" max="120" step="5"
+            value="{{match.duration}}" show-value="true" class="slider" />
+        </mp-cell>
+        <mp-cell show-error prop="charge" title="收费模式" ext-class="">
+          <picker bindchange="bindPickerChange" data-field="charge" value="{{match.charge}}" range="{{lstCharge}}">
+            {{lstCharge[match.charge]}}
+          </picker>
+        </mp-cell>
+        <mp-cell wx:if="{{match.charge > 0}}" show-error prop="duration" title="场地费用" ext-class="">
+          <input bindinput="formInputChange" data-field="fee" type="number" maxlength="3" placeholder="请输入人民币，单位元（￥）"
+            value="{{match.fee}}" class="weui-input" />
+        </mp-cell>
+        <mp-cell show-error prop="stadium" title="比赛场地" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before">
+            <input bindinput="formInputChange" data-field="stadium" placeholder="请输入比赛场地名称" value="{{match.stadium}}"
+              class="weui-input" />
+          </view>
+          <view slot="footer" class="weui-vcode-btn">
+            <picker bindchange="bindStadiumChange" data-field="stadium" value="{{stadiumIndex}}" range="{{lstStadium}}">
+              选择
+            </picker>
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="man" title="比赛人数" ext-class="">
+          <slider bindchange="bindSliderChange" data-field="man" min="7" max="11" value="{{match.man}}"
+            show-value="true" class="slider" />
+        </mp-cell>
+        <mp-cell show-error prop="enemy" title="比赛对手" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before">
+            <input bindinput="formInputChange" data-field="enemy" placeholder="请输入比赛对手名称" value="{{match.enemy}}"
+              class="weui-input" />
+          </view>
+          <view slot="footer" class="weui-vcode-btn">
+            <picker bindchange="bindEnemyChange" data-field="enemy" value="{{enemyIndex}}" range="{{lstEnemy}}">
+              选择
+            </picker>
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="color" title="对手颜色" ext-class="weui-cell_vcode">
+          <view class="color">
+            <picker bindchange="bindColorChange" data-field="color1" value="{{colorIndex}}" range="{{cboColor}}">
+              <mp-icon wx:if="{{match.color1 === 'rgba(255, 255, 255)'}}" type="outline" icon="sticker" size="44"></mp-icon>
+              <mp-icon wx:else type="field" icon="sticker" color="{{match.color1}}" size="44"></mp-icon>
+            </picker>
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="man" title="比赛队员" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before">
+            {{match.playerlist.length}}人
+          </view>
+          <view slot="footer" bindtap="bindChangePlayer" class="weui-vcode-btn">选择</view>
+        </mp-cell>
+        <mp-cell show-error prop="memo" title="备注说明" ext-class="">
+          <input bindinput="formInputChange" data-field="memo" class="weui-input" placeholder="请输入备注说明文字"
+            value="{{match.memo}}" />
+        </mp-cell>
+      </mp-cells>
+      <mp-cells title="数据统计" footer="">
+        <mp-cell show-error prop="dataflag" title="比赛成绩" ext-class="weui-cell_vcode">
+          <view class="weui-cell_switch">
+            不统计
+            <switch data-field="dataflag" checked="{{match.dataflag}}" bindchange="bindSwitchChange" /> 统计
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="workflag" title="队员出勤" ext-class="weui-cell_vcode">
+          <view class="weui-cell_switch">
+            不统计
+            <switch data-field="workflag" checked="{{match.workflag}}" bindchange="bindSwitchChange" /> 统计
+          </view>
+        </mp-cell>
+        <mp-cell show-error prop="status" title="进度状态" ext-class="">
+          <picker bindchange="bindPickerChange" data-field="status" value="{{match.status}}" range="{{lstStatus}}">
+            {{lstStatus[match.status]}}
+          </picker>
+        </mp-cell>
+      </mp-cells>
+      <mp-cells wx:if="{{match.status>0}}" title="比赛结果" footer="">
+        <mp-cell show-error prop="goal" title="进球数" ext-class="">
+          <slider bindchange="bindSliderChange" data-field="goal" min="0" max="15" value="{{match.goal}}"
+            show-value="true" class="slider" />
+        </mp-cell>
+        <mp-cell show-error prop="lose" title="失球数" ext-class="">
+          <slider bindchange="bindSliderChange" data-field="lose" min="0" max="15" value="{{match.lose}}"
+            show-value="true" class="slider" />
+        </mp-cell>
+        <mp-cell show-error prop="scorelist" title="进球队员" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+            {{strscorelist}}
+          </view>
+          <view slot="footer" class="weui-vcode-btn" bindtap="bindScorePlayer">选择</view>
+        </mp-cell>
+        <mp-cell show-error prop="assistlist" title="助攻队员" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+            {{strassistlist}}
+          </view>
+          <view slot="footer" class="weui-vcode-btn" bindtap="bindAssistPlayer">选择</view>
+        </mp-cell>
+        <mp-cell show-error prop="mvplist" title="本场最佳" ext-class="weui-cell_vcode">
+          <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+            {{strmvplist}}
+          </view>
+          <view slot="footer" class="weui-vcode-btn" bindtap="bindMvpPlayer">选择</view>
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
+    <view wx:if="{{loginPlayerRole >= 1}}" class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submitForm">保存</button>
+    </view>
+  </view>
+</view>
+<mp-dialog title="发布比赛成功" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <icon class="icon-box-img" type="success" size="64"></icon>
+</mp-dialog>

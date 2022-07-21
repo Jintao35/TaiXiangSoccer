@@ -1,0 +1,124 @@
+<!-- 6_1比赛结果 -->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="page__title">{{match.strTime}} 太翔 vs {{match.enemy}}</view>
+  </view>
+  <view class="page__bd">
+    <mp-form id="form" rules="{{rules}}">
+      <block wx:if="{{tabIndex === 0}}">
+        <mp-cells title="出勤队员列表">
+          <scroll-view class="scroll" scroll-y="true">
+            <block wx:for="{{lstPlayer}}" wx:key="index">
+              <mp-cell data-item="{{item}}" bindtap="bindCellClick">
+                <view class="weui-cell weui-cell_example">
+                  <view class="weui-cell__hd">
+                    <image class="pic" src="{{item.pic}}" />
+                  </view>
+                  <view class="weui-cell__bd">
+                    {{item.no}}.{{item.name}} {{item.minutes}}分钟
+                  </view>
+                  <view slot="footer" class="weui-vcode-btn" data-item="{{item}}" bindtap="bindDelPlayer">缺勤</view>
+                </view>
+              </mp-cell>
+            </block>
+          </scroll-view>
+        </mp-cells>
+        <mp-cells title="当前选择队员 {{selPlayer.no}}.{{selPlayer.name}}" footer="">
+          <mp-cell show-error title="上场时间" ext-class="">
+            <slider class="slider weui-cell-slider" bindchange="bindMinutesChange" min="0" max="{{match.duration}}"
+              step="5" value="{{minutes}}" show-value="true" />
+          </mp-cell>
+        </mp-cells>
+        <mp-cells title="缺勤队员列表" footer="">
+          <mp-cell show-error title="选择队员" ext-class="weui-cell_vcode">
+            <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+              <picker bindchange="bindAbsenceChange" value="{{lstPlayerIndex}}" range="{{lstAbsencePlayer}}"
+                range-key="name">
+                <view class="weui-select">
+                  {{lstAbsencePlayer[lstAbsenceIndex].no}}.{{lstAbsencePlayer[lstAbsenceIndex].name}}
+                  {{lstAbsencePlayer[lstAbsenceIndex].positions}}</view>
+              </picker>
+            </view>
+            <view slot="footer" class="weui-vcode-btn" bindtap="bindAddPlayer">出勤</view>
+          </mp-cell>
+        </mp-cells>
+      </block>
+      <block wx:elif="{{tabIndex === 1}}">
+        <mp-cells title="进失球统计" footer="">
+          <mp-cell show-error prop="scorelist" title="进球队员" ext-class="weui-cell_vcode">
+            <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+              {{strscorelist}}
+            </view>
+            <view slot="footer" class="weui-vcode-btn" bindtap="bindScorePlayer">选择</view>
+          </mp-cell>
+          <mp-cell show-error prop="assistlist" title="助攻队员" ext-class="weui-cell_vcode">
+            <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+              {{strassistlist}}
+            </view>
+            <view slot="footer" class="weui-vcode-btn" bindtap="bindAssistPlayer">选择</view>
+          </mp-cell>
+          <mp-cell show-error prop="mvplist" title="本场最佳" ext-class="weui-cell_vcode">
+            <view class="weui-cell__hd weui-cell__bd_in-select-before scorelist">
+              {{strmvplist}}
+            </view>
+            <view slot="footer" class="weui-vcode-btn" bindtap="bindMvpPlayer">选择</view>
+          </mp-cell>
+          <mp-cell show-error prop="goal" title="本队进球" ext-class="">
+            <slider class="slider weui-cell-slider" bindchange="bindGoalChange" min="0" max="15" value="{{match.goal}}"
+              show-value="true" />
+          </mp-cell>
+          <mp-cell show-error title="对手进球" ext-class="">
+            <slider class="slider weui-cell-slider" bindchange="bindLoseChange" min="0" max="15" value="{{match.lose}}"
+              show-value="true" />
+          </mp-cell>
+        </mp-cells>
+        <view class="btn-sp-area">
+          <button class="weui-btn" type="primary" bindtap="submitForm">保存</button>
+        </view>
+      </block>
+      <block wx:else="{{tabIndex === 2}}">
+        <mp-cells title="" footer="支出：{{spends}} 收取：{{income}} 盈余：{{surplus}}">
+          <mp-cell wx:if="{{match.charge > 0}}" show-error title="场地费用" ext-class="">
+            <input bindinput="formFeeInputChange" data-field="fee" type="number" maxlength="4"
+              placeholder="请输入人民币，单位元（￥）" value="{{match.fee}}" class="weui-cell-slider" />
+          </mp-cell>
+          <mp-cell show-error title="其它费用" ext-class="">
+            <input bindinput="formOtherFeeInputChange" data-field="otherFee" type="number" maxlength="4"
+              placeholder="请输入人民币，单位元（￥）" value="{{otherFee}}" class="weui-cell-slider" />
+          </mp-cell>
+          <mp-cell show-error title="每人收费" ext-class="">
+            <input bindinput='formSingleFeeInputChange' type='number' maxlength="3" placeholder="单位元（￥）"
+              value="{{singleFee}}" class="weui-cell-slider"></input>
+            <view slot="footer" class="weui-vcode-btn" bindtap="bindSub">-</view>
+            <view slot="footer" class="weui-vcode-btn" bindtap="bindAdd">+</view>
+          </mp-cell>
+        </mp-cells>
+        <mp-cells title="">
+          <scroll-view class="scroll2" scroll-y="true">
+            <block wx:for="{{lstPlayer}}" wx:key="index">
+              <mp-cell data-item="{{item}}">
+                <view class="weui-cell weui-cell_example">
+                  <view class="weui-cell__hd">
+                    <image class="pic" src="{{item.pic}}" />
+                  </view>
+                  <view class="weui-cell__bd">
+                    {{item.no}}.{{item.name}}
+                  </view>
+                  <view wx:if="{{item.freeFlag}}" slot="footer" class="weui-vcode-btn" data-item="{{item}}"
+                    bindtap="bindPlayerCharge" style="color:green">收费</view>
+                  <view wx:else slot="footer" class="weui-vcode-btn" data-item="{{item}}" bindtap="bindFreePlayer">免费
+                  </view>
+                </view>
+              </mp-cell>
+            </block>
+          </scroll-view>
+        </mp-cells>
+      </block>
+    </mp-form>
+  </view>
+</view>
+<mp-dialog title="保存比赛结果成功" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <icon class="icon-box-img" type="success" size="64"></icon>
+</mp-dialog>

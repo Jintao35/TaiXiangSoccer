@@ -1,0 +1,38 @@
+.page__hd {
+  background-color: lightcyan;
+  height: 22vh;
+}
+
+.btn_login {
+  padding-top: 9vh;
+}
+
+.user_login {
+  padding-top: 2.5vh;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.user_pic {
+  width: 16vh;
+  height: 16vh;
+  background-color: white;
+  border: 0.5vh solid skyblue;
+  border-radius: 16vh;
+}
+
+.menu_pic {
+  width: 32px;
+  height: 32px;
+  margin-right: 16px;
+  display: block;
+}
+
+.weui-badge_dot {
+  padding: 0.15em 0.4em;
+  font-size: 14px;
+}
+
+.scroll {
+  height: 70vh;
+}

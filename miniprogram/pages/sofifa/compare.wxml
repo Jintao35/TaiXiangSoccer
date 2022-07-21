@@ -1,0 +1,484 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="weui-grids">
+      <view class="weui-pic-grid" style="background-image: url({{fifa1.player.pic}})">
+      </view>
+      <view class="weui-radar-grid">
+        <!-- 雷达图 -->
+        <canvas class='radarCanvas' type="2d" id="radarCanvas"></canvas>　
+      </view>
+      <view class="weui-pic-grid" style="background-image: url({{fifa2.player.pic}})">
+      </view>
+      <view class="weui-grid bold">
+        <picker bindchange="bindPlayerChange1" value="{{cboPlayerIndex1}}" range="{{cboPlayer}}" range-key="name">
+          {{fifa1.player.no}}.{{fifa1.player.name}}
+          <!-- {{cboPlayer[cboPlayerIndex1].no}}.{{cboPlayer[cboPlayerIndex1].name}} -->
+        </picker>
+      </view>
+      <view class="weui-grid bold">
+        <mp-icon icon="sticker" type="field" color="rgba(96, 224, 256, 0.9)" size="20"></mp-icon>
+        姓名{{xx}}
+        <mp-icon icon="sticker" type="field" color="rgba(256, 160, 224, 0.9)" size="20"></mp-icon>
+      </view>
+      <view class="weui-grid bold">
+        <picker bindchange="bindPlayerChange2" value="{{cboPlayerIndex2}}" range="{{cboPlayer}}" range-key="name">
+          {{fifa2.player.no}}.{{fifa2.player.name}}
+          <!-- {{cboPlayer[cboPlayerIndex2].no}}.{{cboPlayer[cboPlayerIndex2].name}} -->
+        </picker>
+      </view>
+      <view class="weui-grid">{{fifa1.player.strBirthday}}</view>
+      <view class="weui-grid">出生日期</view>
+      <view class="weui-grid">{{fifa2.player.strBirthday}}</view>
+      <!-- 体质指数(BMI)=体重(kg)/身高 (m)^2 -->
+      <view class="weui-grid">{{fifa1.player.bmi}}</view>
+      <view class="weui-grid">体质指数</view>
+      <view class="weui-grid">{{fifa2.player.bmi}}</view>
+      <view class="weui-grid bold">{{fifa1.overallRating}}</view>
+      <view class="weui-grid">综合能力</view>
+      <view class="weui-grid bold">{{fifa2.overallRating}}</view>
+      <view class="weui-grid">{{fifa1.potential}}</view>
+      <view class="weui-grid">潜力</view>
+      <view class="weui-grid">{{fifa2.potential}}</view>
+      <view class="weui-grid">{{fifa1.attWorkRate}}</view>
+      <view class="weui-grid">进攻积极性</view>
+      <view class="weui-grid">{{fifa2.attWorkRate}}</view>
+      <view class="weui-grid">{{fifa1.defWorkRate}}</view>
+      <view class="weui-grid">防守积极性</view>
+      <view class="weui-grid">{{fifa2.defWorkRate}}</view>
+      <view class="weui-grid">
+        <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" wx:key="index">
+          <mp-icon wx:if="{{i <= fifa1.weakFoot}}" icon="star" type="field" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+          <mp-icon wx:else icon="star" type="outline" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+        </block>
+      </view>
+      <view class="weui-grid">逆足能力</view>
+      <view class="weui-grid">
+        <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" wx:key="index">
+          <mp-icon wx:if="{{i <= fifa2.weakFoot}}" icon="star" type="field" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+          <mp-icon wx:else icon="star" type="outline" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+        </block>
+      </view>
+      <view class="weui-grid">
+        <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" wx:key="index">
+          <mp-icon wx:if="{{i <= fifa1.skillMoves}}" icon="star" type="field" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+          <mp-icon wx:else icon="star" type="outline" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+        </block>
+      </view>
+      <view class="weui-grid">花式技巧</view>
+      <view class="weui-grid">
+        <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" wx:key="index">
+          <mp-icon wx:if="{{i <= fifa2.skillMoves}}" icon="star" type="field" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+          <mp-icon wx:else icon="star" type="outline" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pacSprintSpeed}}</view>
+      <view class="weui-grid">速度</view>
+      <view class="weui-grid">{{fifa2.pacSprintSpeed}}
+        <block wx:if="{{fifa1.pacSprintSpeed<fifa2.pacSprintSpeed}}">
+          <text class="greater">↑</text>
+          {{fifa2.pacSprintSpeed-fifa1.pacSprintSpeed}}
+        </block>
+        <block wx:elif="{{fifa1.pacSprintSpeed>fifa2.pacSprintSpeed}}">
+          <text class="less">↓</text>
+          {{fifa1.pacSprintSpeed-fifa2.pacSprintSpeed}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pacAcceleration}}</view>
+      <view class="weui-grid">加速</view>
+      <view class="weui-grid">{{fifa2.pacAcceleration}}
+        <block wx:if="{{fifa1.pacAcceleration<fifa2.pacAcceleration}}">
+          <text class="greater">↑</text>
+          {{fifa2.pacAcceleration-fifa1.pacAcceleration}}
+        </block>
+        <block wx:elif="{{fifa1.pacAcceleration>fifa2.pacAcceleration}}">
+          <text class="less">↓</text>
+          {{fifa1.pacAcceleration-fifa2.pacAcceleration}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.shoFinishing}}</view>
+      <view class="weui-grid">射术</view>
+      <view class="weui-grid">{{fifa2.shoFinishing}}
+        <block wx:if="{{fifa1.shoFinishing<fifa2.shoFinishing}}">
+          <text class="greater">↑</text>
+          {{fifa2.shoFinishing-fifa1.shoFinishing}}
+        </block>
+        <block wx:elif="{{fifa1.shoFinishing>fifa2.shoFinishing}}">
+          <text class="less">↓</text>
+          {{fifa1.shoFinishing-fifa2.shoFinishing}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.shoShotPower}}</view>
+      <view class="weui-grid">射门力量</view>
+      <view class="weui-grid">{{fifa2.shoShotPower}}
+        <block wx:if="{{fifa1.shoShotPower<fifa2.shoShotPower}}">
+          <text class="greater">↑</text>
+          {{fifa2.shoShotPower-fifa1.shoShotPower}}
+        </block>
+        <block wx:elif="{{fifa1.shoShotPower>fifa2.shoShotPower}}">
+          <text class="less">↓</text>
+          {{fifa1.shoShotPower-fifa2.shoShotPower}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.shoPositioning}}</view>
+      <view class="weui-grid">跑位</view>
+      <view class="weui-grid">{{fifa2.shoPositioning}}
+        <block wx:if="{{fifa1.shoPositioning<fifa2.shoPositioning}}">
+          <text class="greater">↑</text>
+          {{fifa2.shoPositioning-fifa1.shoPositioning}}
+        </block>
+        <block wx:elif="{{fifa1.shoPositioning>fifa2.shoPositioning}}">
+          <text class="less">↓</text>
+          {{fifa1.shoPositioning-fifa2.shoPositioning}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.shoLongShots}}</view>
+      <view class="weui-grid">远射</view>
+      <view class="weui-grid">{{fifa2.shoLongShots}}
+        <block wx:if="{{fifa1.shoLongShots<fifa2.shoLongShots}}">
+          <text class="greater">↑</text>
+          {{fifa2.shoLongShots-fifa1.shoLongShots}}
+        </block>
+        <block wx:elif="{{fifa1.shoLongShots>fifa2.shoLongShots}}">
+          <text class="less">↓</text>
+          {{fifa1.shoLongShots-fifa2.shoLongShots}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.shoPenalties}}</view>
+      <view class="weui-grid">点球</view>
+      <view class="weui-grid">{{fifa2.shoPenalties}}
+        <block wx:if="{{fifa1.shoPenalties<fifa2.shoPenalties}}">
+          <text class="greater">↑</text>
+          {{fifa2.shoPenalties-fifa1.shoPenalties}}
+        </block>
+        <block wx:elif="{{fifa1.shoPenalties>fifa2.shoPenalties}}">
+          <text class="less">↓</text>
+          {{fifa1.shoPenalties-fifa2.shoPenalties}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.shoVolleys}}</view>
+      <view class="weui-grid">凌空</view>
+      <view class="weui-grid">{{fifa2.shoVolleys}}
+        <block wx:if="{{fifa1.shoVolleys<fifa2.shoVolleys}}">
+          <text class="greater">↑</text>
+          {{fifa2.shoVolleys-fifa1.shoVolleys}}
+        </block>
+        <block wx:elif="{{fifa1.shoVolleys>fifa2.shoVolleys}}">
+          <text class="less">↓</text>
+          {{fifa1.shoVolleys-fifa2.shoVolleys}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pasVision}}</view>
+      <view class="weui-grid">视野</view>
+      <view class="weui-grid">{{fifa2.pasVision}}
+        <block wx:if="{{fifa1.pasVision<fifa2.pasVision}}">
+          <text class="greater">↑</text>
+          {{fifa2.pasVision-fifa1.pasVision}}
+        </block>
+        <block wx:elif="{{fifa1.pasVision>fifa2.pasVision}}">
+          <text class="less">↓</text>
+          {{fifa1.pasVision-fifa2.pasVision}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pasCrossing}}</view>
+      <view class="weui-grid">传中</view>
+      <view class="weui-grid">{{fifa2.pasCrossing}}
+        <block wx:if="{{fifa1.pasCrossing<fifa2.pasCrossing}}">
+          <text class="greater">↑</text>
+          {{fifa2.pasCrossing-fifa1.pasCrossing}}
+        </block>
+        <block wx:elif="{{fifa1.pasCrossing>fifa2.pasCrossing}}">
+          <text class="less">↓</text>
+          {{fifa1.pasCrossing-fifa2.pasCrossing}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pasFKAccuracy}}</view>
+      <view class="weui-grid">任意球</view>
+      <view class="weui-grid">{{fifa2.pasFKAccuracy}}
+        <block wx:if="{{fifa1.pasFKAccuracy<fifa2.pasFKAccuracy}}">
+          <text class="greater">↑</text>
+          {{fifa2.pasFKAccuracy-fifa1.pasFKAccuracy}}
+        </block>
+        <block wx:elif="{{fifa1.pasFKAccuracy>fifa2.pasFKAccuracy}}">
+          <text class="less">↓</text>
+          {{fifa1.pasFKAccuracy-fifa2.pasFKAccuracy}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pasLongPassing}}</view>
+      <view class="weui-grid">长传</view>
+      <view class="weui-grid">{{fifa2.pasLongPassing}}
+        <block wx:if="{{fifa1.pasLongPassing<fifa2.pasLongPassing}}">
+          <text class="greater">↑</text>
+          {{fifa2.pasLongPassing-fifa1.pasLongPassing}}
+        </block>
+        <block wx:elif="{{fifa1.pasLongPassing>fifa2.pasLongPassing}}">
+          <text class="less">↓</text>
+          {{fifa1.pasLongPassing-fifa2.pasLongPassing}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pasShortPassing}}</view>
+      <view class="weui-grid">短传</view>
+      <view class="weui-grid">{{fifa2.pasShortPassing}}
+        <block wx:if="{{fifa1.pasShortPassing<fifa2.pasShortPassing}}">
+          <text class="greater">↑</text>
+          {{fifa2.pasShortPassing-fifa1.pasShortPassing}}
+        </block>
+        <block wx:elif="{{fifa1.pasShortPassing>fifa2.pasShortPassing}}">
+          <text class="less">↓</text>
+          {{fifa1.pasShortPassing-fifa2.pasShortPassing}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.pasCurve}}</view>
+      <view class="weui-grid">弧线</view>
+      <view class="weui-grid">{{fifa2.pasCurve}}
+        <block wx:if="{{fifa1.pasCurve<fifa2.pasCurve}}">
+          <text class="greater">↑</text>
+          {{fifa2.pasCurve-fifa1.pasCurve}}
+        </block>
+        <block wx:elif="{{fifa1.pasCurve>fifa2.pasCurve}}">
+          <text class="less">↓</text>
+          {{fifa1.pasCurve-fifa2.pasCurve}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.driAgility}}</view>
+      <view class="weui-grid">敏捷</view>
+      <view class="weui-grid">{{fifa2.driAgility}}
+        <block wx:if="{{fifa1.driAgility<fifa2.driAgility}}">
+          <text class="greater">↑</text>
+          {{fifa2.driAgility-fifa1.driAgility}}
+        </block>
+        <block wx:elif="{{fifa1.driAgility>fifa2.driAgility}}">
+          <text class="less">↓</text>
+          {{fifa1.driAgility-fifa2.driAgility}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.driBalance}}</view>
+      <view class="weui-grid">平衡</view>
+      <view class="weui-grid">{{fifa2.driBalance}}
+        <block wx:if="{{fifa1.driBalance<fifa2.driBalance}}">
+          <text class="greater">↑</text>
+          {{fifa2.driBalance-fifa1.driBalance}}
+        </block>
+        <block wx:elif="{{fifa1.driBalance>fifa2.driBalance}}">
+          <text class="less">↓</text>
+          {{fifa1.driBalance-fifa2.driBalance}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.driReactions}}</view>
+      <view class="weui-grid">反应</view>
+      <view class="weui-grid">{{fifa2.driReactions}}
+        <block wx:if="{{fifa1.driReactions<fifa2.driReactions}}">
+          <text class="greater">↑</text>
+          {{fifa2.driReactions-fifa1.driReactions}}
+        </block>
+        <block wx:elif="{{fifa1.driReactions>fifa2.driReactions}}">
+          <text class="less">↓</text>
+          {{fifa1.driReactions-fifa2.driReactions}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.driComposure}}</view>
+      <view class="weui-grid">沉着</view>
+      <view class="weui-grid">{{fifa2.driComposure}}
+        <block wx:if="{{fifa1.driComposure<fifa2.driComposure}}">
+          <text class="greater">↑</text>
+          {{fifa2.driComposure-fifa1.driComposure}}
+        </block>
+        <block wx:elif="{{fifa1.driComposure>fifa2.driComposure}}">
+          <text class="less">↓</text>
+          {{fifa1.driComposure-fifa2.driComposure}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.driBallControl}}</view>
+      <view class="weui-grid">控球</view>
+      <view class="weui-grid">{{fifa2.driBallControl}}
+        <block wx:if="{{fifa1.driBallControl<fifa2.driBallControl}}">
+          <text class="greater">↑</text>
+          {{fifa2.driBallControl-fifa1.driBallControl}}
+        </block>
+        <block wx:elif="{{fifa1.driBallControl>fifa2.driBallControl}}">
+          <text class="less">↓</text>
+          {{fifa1.driBallControl-fifa2.driBallControl}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.driDribbling}}</view>
+      <view class="weui-grid">盘带</view>
+      <view class="weui-grid">{{fifa2.driDribbling}}
+        <block wx:if="{{fifa1.driDribbling<fifa2.driDribbling}}">
+          <text class="greater">↑</text>
+          {{fifa2.driDribbling-fifa1.driDribbling}}
+        </block>
+        <block wx:elif="{{fifa1.driDribbling>fifa2.driDribbling}}">
+          <text class="less">↓</text>
+          {{fifa1.driDribbling-fifa2.driDribbling}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.defInterceptions}}</view>
+      <view class="weui-grid">拦截意识</view>
+      <view class="weui-grid">{{fifa2.defInterceptions}}
+        <block wx:if="{{fifa1.defInterceptions<fifa2.defInterceptions}}">
+          <text class="greater">↑</text>
+          {{fifa2.defInterceptions-fifa1.defInterceptions}}
+        </block>
+        <block wx:elif="{{fifa1.defInterceptions>fifa2.defInterceptions}}">
+          <text class="less">↓</text>
+          {{fifa1.defInterceptions-fifa2.defInterceptions}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.defHeading}}</view>
+      <view class="weui-grid">头球精度</view>
+      <view class="weui-grid">{{fifa2.defHeading}}
+        <block wx:if="{{fifa1.defHeading<fifa2.defHeading}}">
+          <text class="greater">↑</text>
+          {{fifa2.defHeading-fifa1.defHeading}}
+        </block>
+        <block wx:elif="{{fifa1.defHeading>fifa2.defHeading}}">
+          <text class="less">↓</text>
+          {{fifa1.defHeading-fifa2.defHeading}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.defMarking}}</view>
+      <view class="weui-grid">防守意识</view>
+      <view class="weui-grid">{{fifa2.defMarking}}
+        <block wx:if="{{fifa1.defMarking<fifa2.defMarking}}">
+          <text class="greater">↑</text>
+          {{fifa2.defMarking-fifa1.defMarking}}
+        </block>
+        <block wx:elif="{{fifa1.defMarking>fifa2.defMarking}}">
+          <text class="less">↓</text>
+          {{fifa1.defMarking-fifa2.defMarking}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.defStandingTackle}}</view>
+      <view class="weui-grid">抢断</view>
+      <view class="weui-grid">{{fifa2.defStandingTackle}}
+        <block wx:if="{{fifa1.defStandingTackle<fifa2.defStandingTackle}}">
+          <text class="greater">↑</text>
+          {{fifa2.defStandingTackle-fifa1.defStandingTackle}}
+        </block>
+        <block wx:elif="{{fifa1.defStandingTackle>fifa2.defStandingTackle}}">
+          <text class="less">↓</text>
+          {{fifa1.defStandingTackle-fifa2.defStandingTackle}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.defSlidingTackle}}</view>
+      <view class="weui-grid">铲球</view>
+      <view class="weui-grid">{{fifa2.defSlidingTackle}}
+        <block wx:if="{{fifa1.defSlidingTackle<fifa2.defSlidingTackle}}">
+          <text class="greater">↑</text>
+          {{fifa2.defSlidingTackle-fifa1.defSlidingTackle}}
+        </block>
+        <block wx:elif="{{fifa1.defSlidingTackle>fifa2.defSlidingTackle}}">
+          <text class="less">↓</text>
+          {{fifa1.defSlidingTackle-fifa2.defSlidingTackle}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.phyJumping}}</view>
+      <view class="weui-grid">弹跳</view>
+      <view class="weui-grid">{{fifa2.phyJumping}}
+        <block wx:if="{{fifa1.phyJumping<fifa2.phyJumping}}">
+          <text class="greater">↑</text>
+          {{fifa2.phyJumping-fifa1.phyJumping}}
+        </block>
+        <block wx:elif="{{fifa1.phyJumping>fifa2.phyJumping}}">
+          <text class="less">↓</text>
+          {{fifa1.phyJumping-fifa2.phyJumping}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.phyStamina}}</view>
+      <view class="weui-grid">体能</view>
+      <view class="weui-grid">{{fifa2.phyStamina}}
+        <block wx:if="{{fifa1.phyStamina<fifa2.phyStamina}}">
+          <text class="greater">↑</text>
+          {{fifa2.phyStamina-fifa1.phyStamina}}
+        </block>
+        <block wx:elif="{{fifa1.phyStamina>fifa2.phyStamina}}">
+          <text class="less">↓</text>
+          {{fifa1.phyStamina-fifa2.phyStamina}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.phyStrength}}</view>
+      <view class="weui-grid">强壮</view>
+      <view class="weui-grid">{{fifa2.phyStrength}}
+        <block wx:if="{{fifa1.phyStrength<fifa2.phyStrength}}">
+          <text class="greater">↑</text>
+          {{fifa2.phyStrength-fifa1.phyStrength}}
+        </block>
+        <block wx:elif="{{fifa1.phyStrength>fifa2.phyStrength}}">
+          <text class="less">↓</text>
+          {{fifa1.phyStrength-fifa2.phyStrength}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.phyAggression}}</view>
+      <view class="weui-grid">侵略性</view>
+      <view class="weui-grid">{{fifa2.phyAggression}}
+        <block wx:if="{{fifa1.phyAggression<fifa2.phyAggression}}">
+          <text class="greater">↑</text>
+          {{fifa2.phyAggression-fifa1.phyAggression}}
+        </block>
+        <block wx:elif="{{fifa1.phyAggression>fifa2.phyAggression}}">
+          <text class="less">↓</text>
+          {{fifa1.phyAggression-fifa2.phyAggression}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.gkDiving}}</view>
+      <view class="weui-grid">鱼跃(GK)</view>
+      <view class="weui-grid">{{fifa2.gkDiving}}
+        <block wx:if="{{fifa1.gkDiving<fifa2.gkDiving}}">
+          <text class="greater">↑</text>
+          {{fifa2.gkDiving-fifa1.gkDiving}}
+        </block>
+        <block wx:elif="{{fifa1.gkDiving>fifa2.gkDiving}}">
+          <text class="less">↓</text>
+          {{fifa1.gkDiving-fifa2.gkDiving}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.gkHandling}}</view>
+      <view class="weui-grid">手形(GK)</view>
+      <view class="weui-grid">{{fifa2.gkHandling}}
+        <block wx:if="{{fifa1.gkHandling<fifa2.gkHandling}}">
+          <text class="greater">↑</text>
+          {{fifa2.gkHandling-fifa1.gkHandling}}
+        </block>
+        <block wx:elif="{{fifa1.gkHandling>fifa2.gkHandling}}">
+          <text class="less">↓</text>
+          {{fifa1.gkHandling-fifa2.gkHandling}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.gkKicking}}</view>
+      <view class="weui-grid">开球(GK)</view>
+      <view class="weui-grid">{{fifa2.gkKicking}}
+        <block wx:if="{{fifa1.gkKicking<fifa2.gkKicking}}">
+          <text class="greater">↑</text>
+          {{fifa2.gkKicking-fifa1.gkKicking}}
+        </block>
+        <block wx:elif="{{fifa1.gkKicking>fifa2.gkKicking}}">
+          <text class="less">↓</text>
+          {{fifa1.gkKicking-fifa2.gkKicking}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.gkPositioning}}</view>
+      <view class="weui-grid">站位(GK)</view>
+      <view class="weui-grid">{{fifa2.gkPositioning}}
+        <block wx:if="{{fifa1.gkPositioning<fifa2.gkPositioning}}">
+          <text class="greater">↑</text>
+          {{fifa2.gkPositioning-fifa1.gkPositioning}}
+        </block>
+        <block wx:elif="{{fifa1.gkPositioning>fifa2.gkPositioning}}">
+          <text class="less">↓</text>
+          {{fifa1.gkPositioning-fifa2.gkPositioning}}
+        </block>
+      </view>
+      <view class="weui-grid">{{fifa1.gkReflexes}}</view>
+      <view class="weui-grid">反应(GK)</view>
+      <view class="weui-grid">{{fifa2.gkReflexes}}
+        <block wx:if="{{fifa1.gkReflexes<fifa2.gkReflexes}}">
+          <text class="greater">↑</text>
+          {{fifa2.gkReflexes-fifa1.gkReflexes}}
+        </block>
+        <block wx:elif="{{fifa1.gkReflexes>fifa2.gkReflexes}}">
+          <text class="less">↓</text>
+          {{fifa1.gkReflexes-fifa2.gkReflexes}}
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

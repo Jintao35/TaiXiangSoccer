@@ -1,0 +1,7 @@
+<!--pages/report/chendian.wxml-->
+<text>pages/report/chendian.wxml</text>
+<view class="btn-sp-area">
+  <button type="warn" size="mini" class="btn-sp" bindtap="bindClear">清理</button>
+  <button type="default" size="mini" class="btn-sp" bindtap="bindWhat">什么</button>
+  <button type="primary" size="mini" class="btn-sp" bindtap="submitForm">沉淀</button>
+</view>

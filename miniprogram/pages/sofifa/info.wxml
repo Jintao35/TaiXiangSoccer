@@ -1,0 +1,390 @@
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<mp-toptips msg="{{info}}" type="info" delay="5000" show="{{info}}"></mp-toptips>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-form id="form">
+      <view class="weui-grids">
+        <view class="weui-pic-grid" style="background-image: url({{fifa.player.pic}})">
+        </view>
+        <block wx:if="{{addFlag === true}}">
+          <view class="weui-grid bold">
+            <picker bindchange="bindPlayerChange" value="{{cboPlayerIndex}}" range="{{cboPlayer}}" range-key="name">
+              {{cboPlayer[cboPlayerIndex].no}} {{cboPlayer[cboPlayerIndex].name}}
+            </picker>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="weui-grid bold">
+            {{fifa.player.no}}.{{fifa.player.name}}
+          </view>
+        </block>
+        <view class="weui-grid bold">
+          <picker bindchange="bindPositionChange" value="{{cboPositionIndex}}" range="{{cboPosition}}" range-key="name">
+            {{cboPosition[cboPositionIndex].value}}
+          </picker>
+        </view>
+        <view class="weui-grid bold">{{fifa.player.strBirthday}}</view>
+        <view class="weui-grid bold">{{fifa.player.height}}cm {{fifa.player.weight}}kg</view>
+        <view class="weui-grid bold" data-field="overallRating" data-msg="综合能力" bindtap="bindSixClick"><text class="bg color{{fifa.overallRating/10}}">{{fifa.overallRating}}</text> 能力</view>
+        <view class="weui-grid bold">
+          <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="potential" value="{{numIndex}}" range="{{lstNum}}">
+            <view class="picker">
+              <text class="bg color{{fifa.potential/10}}">{{fifa.potential}}</text> 潜力
+            </view>
+          </picker>
+        </view>
+        <view class="weui-grid weui-grid-40 bold">
+          <picker bindchange="bindWorkRatePickerChange" data-field="attWorkRate" value="{{pickerIndex[0]}}" range="{{lstWorkRate}}">
+            进攻积极性　{{fifa.attWorkRate}}
+          </picker>
+        </view>
+        <view class="weui-grid weui-grid-60 bold">
+          逆足能力
+          <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" wx:key="index">
+            <mp-icon wx:if="{{i <= fifa.weakFoot}}" icon="star" type="field" color="rgba(255, 201, 64, 1)" size="20" bindtap="bindStarClick" data-field="weakFoot" data-value="{{i}}"></mp-icon>
+            <mp-icon wx:else icon="star" type="outline" color="rgba(255, 201, 64, 1)" size="20" bindtap="bindStarClick" data-field="weakFoot" data-value="{{i}}"></mp-icon>
+          </block>
+        </view>
+        <view class=" weui-grid weui-grid-40 bold">
+          <picker bindchange="bindWorkRatePickerChange" data-field="defWorkRate" value="{{pickerIndex[1]}}" range="{{lstWorkRate}}">
+            防守积极性　{{fifa.defWorkRate}}
+          </picker>
+        </view>
+        <view class="weui-grid weui-grid-60 bold">
+          花式技巧
+          <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:for-item="i" wx:key="index">
+            <mp-icon wx:if="{{i <= fifa.skillMoves}}" icon="star" type="field" color="rgba(255, 201, 64, 1)" size="20" bindtap="bindStarClick" data-field="skillMoves" data-value="{{i}}"></mp-icon>
+            <mp-icon wx:else icon="star" type="outline" color="rgba(255, 201, 64, 1)" size="20" bindtap="bindStarClick" data-field="skillMoves" data-value="{{i}}"></mp-icon>
+          </block>
+        </view>
+      </view>
+      <view class="weui-grids">
+        <view class="weui-grid bold" data-field="pac" data-msg="速度 = 55%速度 + 45%加速" bindtap="bindSixClick">
+          <text class="bg color{{fifa.pac/10}}">{{fifa.pac}}</text>
+          速度
+        </view>
+        <view class="weui-grid bold" data-field="sho" data-msg="射门 = 45%射术 + 5%跑位 + 20%射门力量 + 20%远射 + 5%点球 + 5%凌空" bindtap="bindSixClick">
+          <text class="bg color{{fifa.sho/10}}">{{fifa.sho}}</text>
+          射门
+        </view>
+        <view class="weui-grid bold" data-field="pas" data-msg="传球 = 20%视野 + 20%传中 + 5%任意球精度 + 15%长传 + 35%短传 + 5%弧线" bindtap="bindSixClick">
+          <text class="bg color{{fifa.pas/10}}">{{fifa.pas}}</text>
+          传球
+        </view>
+        <view class="weui-grid bold" data-field="dri" data-msg="盘带 = 10%敏捷 + 5%平衡 + 5%反应 + 30%控球 + 50%盘带" bindtap="bindSixClick">
+          <text class="bg color{{fifa.dri/10}}">{{fifa.dri}}</text>
+          盘带
+        </view>
+        <view class="weui-grid bold" data-field="def" data-msg="防守 = 20%拦截意识 + 10%头球精度 + 30%防守意识 + 30%抢断 + 10%铲球" bindtap="bindSixClick">
+          <text class="bg color{{fifa.def/10}}">{{fifa.def}}</text>
+          防守
+        </view>
+        <view class="weui-grid bold" data-field="phy" data-msg="力量 = 5%弹跳 + 25%体能 + 50%强壮 + 20%侵略性" bindtap="bindSixClick">
+          <text class="bg color{{fifa.phy/10}}">{{fifa.phy}}</text>
+          力量
+        </view>
+      </view>
+      <tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+      <block wx:if="{{tabIndex===0}}">
+        <mp-cells title="速度">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pacSprintSpeed" data-msg="提升冲刺速度将对手远远甩开，全速冲刺时无人能敌。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pacSprintSpeed/10}}">{{fifa.pacSprintSpeed}}</text> 速度
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pacAcceleration" data-msg="提高加速度将提高球员的起跑速度并缩短达到最大冲刺速度的时间。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pacAcceleration/10}}">{{fifa.pacAcceleration}}</text> 加速
+                </view>
+              </picker>
+            </view>
+          </view>
+        </mp-cells>
+        <mp-cells title="射门">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="shoFinishing" data-msg="优秀的临门一脚会提高您在禁区内面对守门员时的射门成功率。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.shoFinishing/10}}">{{fifa.shoFinishing}}</text> 射术
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="shoPositioning" data-msg="排名越高，球被判出界时，您的球员就会自动站到越有利的位置。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.shoPositioning/10}}">{{fifa.shoPositioning}}</text> 跑位
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="shoShotPower" data-msg="无论您的射门类型与距离如何，您的射门力道越大，您的射门就会越强劲。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.shoShotPower/10}}">{{fifa.shoShotPower}}</text> 射门力
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="shoLongShots" data-msg="远射能力越强，禁区外射门得分的几率越大。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.shoLongShots/10}}">{{fifa.shoLongShots}}</text> 远射
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="shoPenalties" data-msg="较高的能力值能增加射进点球的成功率，不给守门员留下任何机会。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.shoPenalties/10}}">{{fifa.shoPenalties}}</text> 点球
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="shoVolleys" data-msg="高评分能增加您凌空抽射进球得分的几率，让守门员无所适从。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.shoVolleys/10}}">{{fifa.shoVolleys}}</text> 凌空
+                </view>
+              </picker>
+            </view>
+          </view>
+        </mp-cells>
+        <mp-cells title="传球">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pasVision" data-msg="视野会提升您的技巧以踢出准确并完美的直塞球，从而增加为队友助攻得分的几率。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pasVision/10}}">{{fifa.pasVision}}</text> 视野
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pasCrossing" data-msg="良好的传中属性可以提高您找到队友并避开对手的机会。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pasCrossing/10}}">{{fifa.pasCrossing}}</text> 传中
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pasFKAccuracy" data-msg="较高的任意球精度会增加您在罚定位球时避开人墙并打破门将十指关的机会。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pasFKAccuracy/10}}">{{fifa.pasFKAccuracy}}</text> 任意球
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pasLongPassing" data-msg="提升您的长传能力，以更精确、更强有力的过顶传球转守为攻。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pasLongPassing/10}}">{{fifa.pasLongPassing}}</text> 长传
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pasShortPassing" data-msg="短传能力越强，球员传球失误的几率越低。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pasShortPassing/10}}">{{fifa.pasShortPassing}}</text> 短传
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="pasCurve" data-msg="弧线评分越高，射门和横传时球的弧度和偏转程度就越高。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.pasCurve/10}}">{{fifa.pasCurve}}</text> 弧线
+                </view>
+              </picker>
+            </view>
+          </view>
+        </mp-cells>
+        <mp-cells title="盘带">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="driAgility" data-msg="敏捷性球员的转身速度更快，并且能够在比赛中做出大力头槌、凌空抽射和倒挂金钩这些动作。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.driAgility/10}}">{{fifa.driAgility}}</text> 敏捷
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="driBalance" data-msg="良好的平衡评分将降低被对手挑战时失去平衡和跌倒的机会。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.driBalance/10}}">{{fifa.driBalance}}</text> 平衡
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="driReactions" data-msg="良好的反应能力可以让您抢得先机，比其他球员更快接近无人持有和弹回的球。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.driReactions/10}}">{{fifa.driReactions}}</text> 反应
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="driComposure" data-msg="确定持球球员在什么距离开始感受到来自对手的压力，然后影响球员在射门、传球、传中等时出错的几率。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.driComposure/10}}">{{fifa.driComposure}}</text> 沉着
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="driBallControl" data-msg="您的控球越好，您的球员在接球时的更可能作出良好的第一脚触球。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.driBallControl/10}}">{{fifa.driBallControl}}</text> 控球
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="driDribbling" data-msg="优秀的带球评分表示您的球员在高速奔跑时能更紧密地控制着足球。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.driDribbling/10}}">{{fifa.driDribbling}}</text> 盘带
+                </view>
+              </picker>
+            </view>
+          </view>
+        </mp-cells>
+        <mp-cells title="防守">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="defInterceptions" data-msg="切断对方传球的能力。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.defInterceptions/10}}">{{fifa.defInterceptions}}</text> 拦截
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="defHeading" data-msg="高头球精度能增加您在球门前时机的把握并提高精度。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.defHeading/10}}">{{fifa.defHeading}}</text> 头球
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="defMarking" data-msg="增加您的盯人属性会强化在球队没有球权时您球员采取的默认站位。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.defMarking/10}}">{{fifa.defMarking}}</text> 防守
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="defStandingTackle" data-msg="抢断值越高意味着下脚时拦下足球的成功率越高。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.defStandingTackle/10}}">{{fifa.defStandingTackle}}</text> 抢断
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="defSlidingTackle" data-msg="数值越高，滑铲成功的几率越大。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.defSlidingTackle/10}}">{{fifa.defSlidingTackle}}</text> 铲球
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">　</view>
+          </view>
+        </mp-cells>
+        <mp-cells title="力量">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="phyJumping" data-msg="您跳的越高，就越有可能打败对手争得高空球。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.phyJumping/10}}">{{fifa.phyJumping}}</text> 弹跳
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="phyStamina" data-msg="耐力值高的球员在场上的冲刺时间更长，耐力恢复的速度更快。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.phyStamina/10}}">{{fifa.phyStamina}}</text> 体能
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="phyStrength" data-msg="力量可以增加您与对手球员进行身体对抗时胜出的几率。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.phyStrength/10}}">{{fifa.phyStrength}}</text> 强壮
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="phyAggression" data-msg="积极性会提升您在 50/50 争夺中获得球权的成功率。" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.phyAggression/10}}">{{fifa.phyAggression}}</text> 侵略性
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">　</view>
+            <view class="weui-grid">　</view>
+          </view>
+        </mp-cells>
+        <mp-cells title="守门">
+          <view class="weui-grids">
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="gkDiving" data-msg="" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.gkDiving/10}}">{{fifa.gkDiving}}</text> 鱼跃
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="gkHandling" data-msg="" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.gkHandling/10}}">{{fifa.gkHandling}}</text> 手型
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="gkKicking" data-msg="" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.gkKicking/10}}">{{fifa.gkKicking}}</text> 开球
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="gkPositioning" data-msg="" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.gkPositioning/10}}">{{fifa.gkPositioning}}</text> 站位
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-field="gkReflexes" data-msg="" value="{{numIndex}}" range="{{lstNum}}">
+                <view class="picker">
+                  <text class="bg color{{fifa.gkReflexes/10}}">{{fifa.gkReflexes}}</text> 反应
+                </view>
+              </picker>
+            </view>
+            <view class="weui-grid">　</view>
+          </view>
+        </mp-cells>
+      </block>
+      <block wx:elif="{{tabIndex===1}}">
+        <view class="positions">
+          <image class="park" src="https://wx1.sinaimg.cn/large/008nJrvKly1guqiuu7d26j61i61buh1u02.jpg">
+          </image>
+          <view class="row" wx:for="{{lstSquad}}" wx:for-item="row" wx:key="index">
+            <view class="cell" wx:for="{{row.lstCell}}" wx:for-item="cell" wx:key="index">
+              <view class="position polor{{cell.rating/10}}" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" bindtap="bindSquadClick">
+                {{cell.name}}
+                <view class="cellRating">{{cell.rating}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:elif="{{tabIndex===2}}">
+        <mp-cells>
+          <mp-checkbox-group prop="checkbox" multi="true" bindchange="bindTraitChange">
+            <mp-checkbox wx:for="{{chklsTrait}}" wx:key="value" label="{{item.name}}" value="{{item.value}}" checked="{{item.checked}}">
+            </mp-checkbox>
+          </mp-checkbox-group>
+        </mp-cells>
+      </block>
+    </mp-form>
+    <view class="weui-btn-area">
+      <button class="weui-btn" type="primary" bindtap="submitForm">保存</button>
+    </view>
+  </view>
+</view>
+<mp-dialog title="保存成功" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <icon class="icon-box-img" type="success" size="64"></icon>
+</mp-dialog>

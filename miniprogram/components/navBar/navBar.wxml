@@ -1,0 +1,13 @@
+<!-- components/navBar.wxml -->
+<scroll-view class='scroll' scroll-x='true'>
+  <view class="tab_view {{ current_tab == index ? 'active' : ''}}" wx:for='{{tabBar}}' wx:key='index' data-index="{{index}}"  style='width:{{width}}%' catchtap='switch_tabBar'>
+    <text>{{item.title}}</text>
+    <text wx:if='{{item.count.length == 1}}' class="circle {{ current_tab == index ? 'circle_active' : 'no_active'}}" style='width:28rpx'>{{item.count}}</text>
+    <text wx:elif='{{item.count.length == 2}}' class="circle {{ current_tab == index ? 'circle_active' : 'no_active'}}" style='width:40rpx;border-radius:20rpx'>{{item.count}}</text>
+    <text wx:elif='{{item.count.length == 3}}' class="circle {{ current_tab == index ? 'circle_active' : 'no_active'}}" style='width:52rpx;border-radius:20rpx'>{{item.count}}</text>
+    <!-- <text wx:else class="circle {{ current_tab == index ? 'circle_active' : 'no_active'}}" style='width:52rpx;border-radius:20rpx'>999+</text> -->
+  </view>
+  <view class="tab_line" style="width:{{width}}%;transform:translateX({{100*current_tab}}%)">
+    <view></view>
+  </view>
+</scroll-view>

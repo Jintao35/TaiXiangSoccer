@@ -1,0 +1,22 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <view class="weui-grids">
+      <view class="weui-grid weui-grid-100 bold">{{title}}</view>
+      <view class="weui-grid weui-grid-32 bold">队员（{{lstPlayer.length}}）</view>
+      <view class="weui-grid bold">进球</view>
+      <view class="weui-grid bold">助攻</view>
+      <view class="weui-grid weui-grid-28 bold">本场最佳</view>
+      <scroll-view class="scrollview" scroll-y="true">
+        <block wx:for="{{lstPlayer}}" wx:for-item="item" wx:key="index">
+          <view class="weui-grid weui-grid-32">{{item.no}}.{{item.name}}</view>
+          <view class="weui-grid">{{item.goal}}</view>
+          <view class="weui-grid">{{item.assist}}</view>
+          <view wx:if="{{item.isMvp === true}}" class="weui-grid weui-grid-28">
+            <image class="mvp_pic" src="https://wx3.sinaimg.cn/large/008nJrvKly1gxwqs8dx87j30100100sh.jpg" />
+          </view>
+          <view wx:else class="weui-grid weui-grid-28">-</view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+</view>

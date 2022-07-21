@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/about",
+    "pages/index/recruit",
+    "pages/index/information",
+
+    "pages/user/user",
+    "pages/user/ok",
+    "pages/user/list",
+
+    "pages/player/list",
+    "pages/player/info",
+    "pages/player/number",
+
+    "pages/formation/formation",
+    "pages/formation/setting",
+    "pages/formation/list",
+
+    "pages/match/list",
+    "pages/match/match",
+    "pages/match/players",
+
+    "pages/squad/setting",
+    "pages/squad/list",
+    "pages/squad/playtime",
+    "pages/squad/view",
+
+    "pages/matchresult/gameover",
+    "pages/matchresult/goals",
+    "pages/matchresult/mvp",
+    "pages/matchresult/view",
+    
+    "pages/report/team",
+    "pages/report/student",
+    "pages/report/detail",
+    "pages/report/chendian",
+
+    "pages/sofifa/sofifa",
+    "pages/sofifa/info",
+    "pages/sofifa/compare"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "大连太翔FC v1.27",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

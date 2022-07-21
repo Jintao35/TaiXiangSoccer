@@ -1,0 +1,24 @@
+/* pages/sofifa/sofifa.wxss */
+.scrollView {
+  height: 80vh;
+}
+
+.weui-grid {
+  text-align: center;
+  padding: 10px 10px;
+  background-color: white;
+}
+
+.weui-pic-grid {
+  position: relative;
+  float: left;
+  padding: 72px 0px;
+  height: 160px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+}
+
+.row0 {
+  background-color: rgba(192, 255, 255, 0.4);
+}

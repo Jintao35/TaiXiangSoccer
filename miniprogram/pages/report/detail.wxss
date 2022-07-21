@@ -1,0 +1,76 @@
+/* pages/report/detail.wxss */
+.tbody {
+  height: 80vh;
+}
+
+.weui-grid {
+  text-align: center;
+  padding: 10px 10px;
+  background-color: white;
+  width: 25%;
+}
+
+.weui-grid-32 {
+  width: 32%;
+}
+
+.weui-grid-18 {
+  width: 18%;
+}
+
+.mvp_pic {
+  width: 25px;
+  height: 25px;
+  display: block;
+}
+
+
+.list-title {
+  position: relative;
+  margin-right: 10px;
+  width: 42px;
+  text-align: center;
+  line-height: 26px;
+  font-size: 26px;
+}
+
+.match-title {
+  font-size: 20px;
+}
+
+.match-memo {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #888888;
+}
+
+.cell-badge {
+  position: absolute;
+  top: 2em;
+  right: 5em;
+}
+
+.bg {
+  display: inline-block;
+  border-radius: 2vw;
+  padding: 5px;
+  color: white;
+  display: inline-block;
+  text-align: center;
+  margin: 0.8vw;
+  height: 6.4vw;
+  line-height: 6.4vw;
+  width: 6.4vw;
+}
+
+.color9 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.color7 {
+  background: rgba(230, 182, 0, 0.9) !important;
+}
+
+.color5 {
+  background: rgba(201, 42, 42, 0.9) !important;
+}

@@ -1,0 +1,11 @@
+/* pages/match/match.wxss */
+.time {
+  line-height: 24px;
+}
+
+.color {
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

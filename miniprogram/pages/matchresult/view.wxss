@@ -1,0 +1,28 @@
+/* pages/matchresult/view.wxss */
+.scrollview {
+  height: 80vh;
+  overflow: scroll;
+}
+
+.weui-grid {
+  padding: 2vh 4vw;
+  width: 20%;
+}
+
+.weui-grid-100 {
+  width: 100%;
+}
+
+.weui-grid-32 {
+  width: 32%;
+}
+
+.weui-grid-28 {
+  width: 28%;
+}
+
+.mvp_pic {
+  width: 25px;
+  height: 25px;
+  display: block;
+}

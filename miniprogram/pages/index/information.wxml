@@ -1,0 +1,23 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__hd">
+    <view class="weui-msg">
+      <view class="weui-msg__title" slot="desc">
+        大连太翔足球队简介
+      </view>
+    </view>
+  </view>
+  <view class="page__bd">
+    <view>
+      大连太翔足球俱乐部源自2005年4月成立的阿森纳T业余足球队，2018年11月球队易名为太翔队。球队自建队以来始终保持着团结进取、永不服输的精神。大连太翔足球俱乐部推崇团结、友爱、拼搏、进取的快乐足球精神，倡导足球健康向上、共同进步、增强体质的宗旨理念。目前俱乐部注册球员共计28名。经过队员们的不懈努力和成长及高强度比赛的积累，球队逐渐成为一支在大连业余级足球队中具备中游实力的队伍。
+    </view>
+    <view>
+      2021年6月，在由亚细亚球场主办的比赛一一2021年度大连亚细亚约战体验赛上，太翔队扮演了“黑马”角色，一路过关斩将，从40多支球队中杀入八强，但提前遭遇了本次赛事的冠军队伍盛世汽车汇被淘汰出局。
+    </view>
+    <view>
+      截止2022年1月，球队现有注册队员28名，平均年龄35.17岁。
+    </view>
+    <!-- <view class="weui-msg__icon-area" slot="desc">
+      <image class="weui-msg__icon-img" src="https://wx1.sinaimg.cn/large/008nJrvKly1gz533zpb53j31400u0tjn.jpg" />
+    </view> -->
+  </view>
+</view>

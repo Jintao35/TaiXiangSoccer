@@ -1,0 +1,32 @@
+<!-- 5_3查看阵容 -->
+<tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="positions">
+  <image class="park" src="https://wx1.sinaimg.cn/large/008nJrvKly1guqiuu7d26j61i61buh1u02.jpg" />
+  <view class="row" wx:for="{{match.quarterlist[tabIndex].squadlist}}" wx:for-item="row" wx:key="index">
+    <view class="cell" wx:for="{{row.lstCell}}" wx:for-item="cell" wx:key="index">
+      <view wx:if="{{cell.picked}}" class="position checked player {{cell.class}}" data-position="{{cell.name}}"
+        data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" data-playerid="{{cell.player._id}}">
+        <image class="pic" src="{{cell.player.pic}}" />
+      </view>
+      <view wx:elif="{{cell.checked}}" class="position checked {{cell.class}}" data-position="{{cell.name}}"
+        data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}">{{cell.name}}
+      </view>
+      <view wx:else class="position"><text>{{cell.name}}</text></view>
+    </view>
+  </view>
+</view>
+<view class="table">
+  首发{{match.quarterlist[tabIndex].lineuplist.length}}/{{match.quarterlist[tabIndex].people}}，替补({{lstPlayer.length}})
+  <scroll-view class="scroll" scroll-y="true">
+    <mp-cells>
+      <mp-cell wx:for="{{lstPlayer}}" data-item="{{item}}" wx:key="index">
+        <view class="weui-cell weui-cell_example">
+          {{item.no}}.{{item.name}} {{item.positions}}
+        </view>
+      </mp-cell>
+    </mp-cells>
+  </scroll-view>
+</view>
+<view class="btn-sp-area">
+  <button type="primary" size="mini" class="btn-sp" bindtap="bindOk">确定</button>
+</view>

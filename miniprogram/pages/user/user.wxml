@@ -1,0 +1,57 @@
+<!-- 1_2用户注册 -->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+	<view class="page__hd">
+		<view class="page__title">用户信息</view>
+	</view>
+	<view class="page__bd">
+		<mp-form id="form" rules="{{rules}}" models="{{user}}">
+			<mp-cells title="基本信息（必填）" footer="以上信息请如实填写，待确认无误后请点击注册按钮">
+				<mp-cell show-error prop="name" title="姓名" ext-class="">
+					<input bindinput="formInputChange" data-field="name" class="weui-input" maxlength="20" placeholder="请输入姓名" value="{{[user.name]}}" />
+				</mp-cell>
+				<mp-cell show-error prop="height" title="身高" ext-class="">
+					<input bindinput="formInputChange" data-field="height" class="weui-input" type="number" maxlength="3"
+						placeholder="请输入身高，单位cm" value="{{[user.height]}}"/>
+				</mp-cell>
+				<mp-cell show-error prop="weight" title="体重" ext-class="">
+					<input bindinput="formInputChange" data-field="weight" class="weui-input" type="number" maxlength="3"
+						placeholder="请输入体重，单位kg" value="{{[user.weight]}}" />
+				</mp-cell>
+				<mp-cell prop="date" title="生日" ext-class="">
+					<picker data-field="birthday" mode="date" value="{{date}}" start="1970-01-01" end="2030-01-01"
+						bindchange="bindDateChange">
+						<view class="weui-input">{{date}}</view>
+					</picker>
+				</mp-cell>
+				<view class="weui-cells weui-cells_after-title">
+					<view class="weui-cell weui-cell_switch">
+						<!-- <view class="weui-cell__bd">性别</view>
+						<view class="weui-cell__bd">
+							女
+							<switch checked="{{user.sex}}" bindchange="bindSexChange" /> 男
+						</view> -->
+						<view class="weui-cell__bd">惯用脚</view>
+						<view class="weui-cell__bd">
+							左脚
+							<switch checked="{{user.foot}}" bindchange="bindFootChange" /> 右脚
+						</view>
+					</view>
+				</view>
+				<mp-cells title="擅长位置（选填）">
+					<mp-checkbox-group prop="checkbox" multi="true" bindchange="bindPositionChange">
+						<mp-checkbox wx:for="{{lstPosition}}" wx:key="value" label="{{item.name}}" value="{{item.value}}"
+							checked="{{item.checked}}"></mp-checkbox>
+					</mp-checkbox-group>
+				</mp-cells>
+			</mp-cells>
+		</mp-form>
+		<view class="weui-btn-area">
+			<button class="weui-btn" type="primary" bindtap="submitForm">保存</button>
+		</view>
+	</view>
+</view>
+<mp-dialog title="保存成功" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+	<icon class="icon-box-img" type="success" size="64"></icon>
+	<view>感受足球的乐趣吧~</view>
+</mp-dialog>

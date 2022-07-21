@@ -1,0 +1,10 @@
+.logo {
+  width: 64px;
+  height: 64px;
+}
+.page__hd {
+  height: 32vh;
+}
+.page__bd {
+  height: 54vh;
+}

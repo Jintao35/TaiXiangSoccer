@@ -1,0 +1,108 @@
+/* pages/squad/list.wxss */
+.pic_mini {
+  width: 8px;
+  height: 8px;
+}
+
+/* 背景层 */
+.park {
+  position: fixed;
+  z-index: -2;
+  width: 100vw;
+  height: 60vh;
+  background-size: cover;
+}
+
+.tabbar {
+  height: 10vh;
+}
+
+/* z轴定位层 */
+.positions {
+  height: 60vh;
+}
+
+/* 横向对齐层 */
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+/* 占位层 */
+.cell {
+  width: 20vw;
+}
+
+/* 最里层默认 */
+.position {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.0);
+  background: rgba(192, 192, 192, 0.0);
+  border-radius: 18px;
+  text-align: center;
+  margin: 1vh;
+  height: 8vh;
+  line-height: 8vh;
+  width: -webkit-fill-available;
+}
+
+/* 最里层高亮 */
+.checked {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 192, 255, 0.6);
+}
+
+/* 最里层队员 */
+.player {
+  background: rgba(255, 255, 255, 0.0);
+}
+
+/* 最里层被选中 */
+.select {
+  background: rgba(255, 255, 0, 0.6);
+}
+
+/* 头像 */
+.pic {
+  z-index: -1;
+  width: 8vh;
+  height: 8vh;
+}
+
+.scroll {
+  height: 25vh;
+}
+
+.table {
+  height: 25vh;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: var(--weui-FG-1);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.table-row {
+  font-size: 16px;
+}
+
+.weui-cell {
+  padding: 12px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.button-sp-area {
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mini-btn {
+  margin-right: 10rpx;
+}

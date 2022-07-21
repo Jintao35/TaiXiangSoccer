@@ -1,0 +1,50 @@
+/* pages/matchresult/gameover.wxss */
+.slider {
+  margin: 0px; 
+}
+
+.scorelist {
+  color: gray
+}
+
+.scroll {
+  height: 50vh;
+}
+
+.scroll2 {
+  height: 55vh;
+}
+
+.weui-cell {
+  padding: 0px 4px;
+}
+
+.weui-cell-slider {
+  padding: 10px;
+}
+
+.pic {
+  z-index: -1;
+  width: 6vh;
+  height: 6vh;
+}
+
+/* 滑动选择器 */
+.slider {
+  margin: 8px;
+}
+
+/*加号和减号*/
+.stepper text {
+  padding: 10px;
+  float: left;
+  width: 26px;
+  text-align: center;
+}
+/*数值*/
+.stepper input {
+  width: 40px;
+  float: left;
+  margin: 0 auto;
+  text-align: center;
+}

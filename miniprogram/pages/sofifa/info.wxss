@@ -1,0 +1,154 @@
+/* pages/sofifa/info.wxss */
+.star {
+  color: #ffc940;
+}
+
+.bg {
+  padding: 5px;
+  color: white;
+}
+
+.weui-pic-grid {
+  position: relative;
+  float: left;
+  padding: 96px 0px;
+  width: 33.33333333%;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+}
+
+.color9 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.color8 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.color7 {
+  background: rgba(102, 168, 15, 0.9) !important;
+}
+
+.color6 {
+  background: rgba(230, 182, 0, 0.9) !important;
+}
+
+.color5 {
+  background: rgba(217, 92, 15, 0.9) !important;
+}
+
+.color4 {
+  background: rgba(201, 42, 42, 0.9) !important;
+}
+
+.color3 {
+  background: rgba(201, 42, 42, 0.9) !important;
+}
+
+.color2 {
+  background: rgba(201, 42, 42, 0.9) !important;
+}
+
+.color1 {
+  background: rgba(201, 42, 42, 0.9) !important;
+}
+
+.polor9 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.polor8 {
+  background: rgba(12, 133, 57, 0.9) !important;
+}
+
+.polor7 {
+  background: rgba(12, 133, 57, 0.6) !important;
+}
+
+.polor6 {
+  background: rgba(102, 168, 15, 0.7) !important;
+}
+
+.polor5 {
+  background: rgba(230, 182, 0, 0.7) !important;
+}
+
+.polor4 {
+  background: rgba(217, 92, 15, 0.7) !important;
+}
+
+.polor3 {
+  background: rgba(201, 42, 42, 0.8) !important;
+}
+
+.polor2 {
+  background: rgba(201, 42, 42, 0.6) !important;
+}
+
+.polor1 {
+  background: rgba(201, 42, 42, 0.4) !important;
+}
+
+.polor0 {
+  background: rgba(201, 42, 42, 0.2) !important;
+}
+
+.weui-grid-60 {
+  width: 60%;
+}
+
+.weui-grid-50 {
+  width: 50%;
+}
+
+.weui-grid-40 {
+  width: 40%;
+}
+
+/* 背景层 */
+.park {
+  position: absolute;
+  z-index: -2;
+  width: 100vw;
+  height: 60vh;
+  background-size: cover;
+}
+
+/* z轴定位层 */
+.positions {
+  height: 60vh;
+}
+
+/* 横向对齐层 */
+.row {
+  z-index: 21;
+  display: flex;
+  justify-content: center;
+}
+
+/* 占位层 */
+.cell {
+  width: 20vw;
+}
+
+/* 最里层默认 */
+.position {
+  display: flex;
+  flex-direction: column;
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(192, 192, 192, 0.4);
+  border-radius: 18px;
+  text-align: center;
+  margin: 1vh;
+  height: 8vh;
+  line-height: 4vh;
+  width: -webkit-fill-available;
+}
+
+.cellRating {
+  margin: 0 auto;
+  width: 4vh;
+  height: 4vh;
+}

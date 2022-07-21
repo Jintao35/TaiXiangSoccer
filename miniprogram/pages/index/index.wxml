@@ -1,0 +1,113 @@
+<!-- 1_1首页 -->
+<mp-toptips msg="{{error}}" type="info" show="{{error}}"></mp-toptips>
+<view class="page">
+  <view class="page__hd">
+    <view wx:if="{{login}}" class="user_login">
+      <!-- 用户已登录 -->
+      <image class="user_pic" src="{{loginPlayer.pic}}" bindtap="tapPicClick" />
+      <text>{{loginPlayer.no}}.{{loginPlayer.name}}</text>
+    </view>
+    <view wx:else class="btn_login">
+      <!-- 用户未登录 -->
+      <button type="primary" size="default" bindtap="tapLoginClick">登录</button>
+      注：本程序仅供球队内部人员使用
+    </view>
+  </view>
+  <view class="page__bd">
+    <scroll-view class="scroll" scroll-y="true">
+      <view wx:if="{{login}}">
+        <block wx:if="{{loginPlayer.role > 0}}">
+          <!-- 管理员菜单 -->
+          <navigator url="./../user/list" class="weui-cell weui-cell_access">
+            <view class="weui-cell__hd">
+              <image class="menu_pic" src="https://wx3.sinaimg.cn/large/008nJrvKly1gvw6xd7aywj30100100ow.jpg" />
+            </view>
+            <view class="weui-cell__bd">用户管理</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+        </block>
+        <navigator url="./../player/list" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx4.sinaimg.cn/large/008nJrvKly1gvw6xf1bjqj30100100p1.jpg" />
+          </view>
+          <view class="weui-cell__bd">队员管理</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <block wx:if="{{loginPlayer.role > 0}}">
+          <navigator url="./../match/match" class="weui-cell weui-cell_access">
+            <view class="weui-cell__hd">
+              <image class="menu_pic" src="https://wx4.sinaimg.cn/large/008nJrvKly1gvw6xhm7iuj30100100s6.jpg" />
+            </view>
+            <view class="weui-cell__bd">发布比赛</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+          </navigator>
+        </block>
+        <navigator url="./../match/list" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx2.sinaimg.cn/large/008nJrvKly1gvw6xmoe7rj30100100sh.jpg" />
+          </view>
+          <view class="weui-cell__bd">比赛信息</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            <!--   即将开赛
+          <view class="weui-badge weui-badge_dot"></view> -->
+          </view>
+        </navigator>
+        <navigator url="./../formation/formation" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx1.sinaimg.cn/large/008nJrvKly1gvw6xo29p3j30100100qr.jpg" />
+          </view>
+          <view class="weui-cell__bd">阵容模拟</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="./../report/team" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx4.sinaimg.cn/large/008nJrvKly1gxylmcuzpyj30100100m6.jpg" />
+          </view>
+          <view class="weui-cell__bd">球队战绩</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="./../report/student" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx4.sinaimg.cn/large/008nJrvKly1gvw6xq788vj30100100se.jpg" />
+          </view>
+          <view class="weui-cell__bd">个人数据</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+        <navigator url="./../sofifa/sofifa" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx3.sinaimg.cn/large/008nJrvKly1gvw6xrq65wj30100100sh.jpg" />
+          </view>
+          <view class="weui-cell__bd">能力分析</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+      <view wx:else>
+        <navigator url="./../user/ok" class="weui-cell weui-cell_access">
+          <view class="weui-cell__hd">
+            <image class="menu_pic" src="https://wx3.sinaimg.cn/large/008nJrvKly1gvw6xb8qncj30100100l0.jpg" />
+          </view>
+          <view class="weui-cell__bd">立即注册</view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+        </navigator>
+      </view>
+      <navigator url="./../index/about" class="weui-cell weui-cell_access">
+        <view class="weui-cell__hd">
+          <image class="menu_pic" src="https://wx4.sinaimg.cn/large/008nJrvKly1gvw6xvuj4bj30100100sh.jpg" />
+        </view>
+        <view class="weui-cell__bd">关于太翔</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <navigator open-type="exit" target="miniProgram" class="weui-cell weui-cell_access">
+        <view class="weui-cell__hd">
+          <image class="menu_pic" src="https://wx1.sinaimg.cn/large/008nJrvKly1gvw6xb8p01j30100100nb.jpg" />
+        </view>
+        <view class="weui-cell__bd">关闭程序</view>
+      </navigator>
+    </scroll-view>
+  </view>
+</view>
+<mp-dialog title="提示" show="{{signDialogShow}}" bindbuttontap="tapSignDialogClick" buttons="{{signButtons}}">
+  <view>您尚未注册，是否立即注册</view>
+</mp-dialog>
+<mp-actionSheet title="用户基本操作" show="{{userActionShow}}" actions="{{userActions}}" bindactiontap="tapUserActionClick">
+</mp-actionSheet>

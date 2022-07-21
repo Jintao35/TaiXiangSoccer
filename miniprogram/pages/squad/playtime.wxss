@@ -1,0 +1,21 @@
+/* pages/match/playtime.wxss */
+.weui-cell {
+  padding: 4px;
+}
+
+/* 头像 */
+.pic {
+  z-index: -1;
+  width: 8vh;
+  height: 8vh;
+}
+
+.button-sp-area {
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mini-btn {
+  margin-right: 10rpx;
+}

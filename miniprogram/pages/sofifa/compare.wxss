@@ -1,0 +1,55 @@
+/* pages/sofifa/compare.wxss */
+
+
+.star {
+  color: rgba(255, 201, 64, 1);
+}
+
+.p1 {
+  color: rgba(256, 160, 224, 1);
+}
+
+.p2 {
+  color: rgba(96, 224, 256, 0.9);
+}
+
+.greater {
+  color: rgba(12, 133, 57, 1);
+}
+
+.less {
+  color: rgba(201, 42, 42, 1);
+}
+
+.weui-grid {
+  text-align: center;
+  padding: 10px 10px;
+}
+
+.weui-pic-grid {
+  position: relative;
+  float: left;
+  padding: 72px 0px;
+  width: 25%;
+  height: 160px;
+  box-sizing: border-box;
+  background-size: cover;
+  background-position: center;
+}
+
+.weui-radar-grid {
+  /* position: relative; */
+  float: left;
+  padding: 0px 0px;
+  height: 160px;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.radarCanvas {
+  width: 50%;
+  height: 160px;
+  margin: 0 auto;
+  top: 0px;
+  position: absolute;
+}

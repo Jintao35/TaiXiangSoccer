@@ -1,0 +1,19 @@
+/* pages/report/student.wxss */
+.tbody {
+  height: 80vh;
+}
+
+.weui-grid {
+  text-align: center;
+  padding: 10px 10px;
+  background-color: white;
+  width: 25%;
+}
+
+.weui-grid-32 {
+  width: 32%;
+}
+
+.weui-grid-18 {
+  width: 18%;
+}

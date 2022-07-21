@@ -1,0 +1,57 @@
+/**app.wxss**/
+@import './miniprogram_npm/weui-miniprogram/weui-wxss/dist/style/weui.wxss';
+
+.bold {
+  font-weight: bold
+}
+
+.btn-area {
+  background-color: #fff;
+  padding: 48px 16px 8px;
+}
+
+.btn-sp-area {
+  background-color: #fff;
+  margin: 0 auto;
+  padding: 12px 12px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.btn-sp {
+  margin: 0px 6px 0px 6px;
+}
+
+/* 滑动选择器 */
+.slider {
+  margin: 0px;
+}
+
+/* 表格 */
+.weui-grid-100 {
+  width: 100%;
+}
+
+.weui-grid-80 {
+  width: 80%;
+}
+
+.weui-grid-60 {
+  width: 60%;
+}
+
+.weui-grid-50 {
+  width: 50%;
+}
+
+.weui-grid-40 {
+  width: 40%;
+}
+
+.weui-grid-20 {
+  width: 20%;
+}
+
+.sort {
+  color: #ec4f4f;
+}

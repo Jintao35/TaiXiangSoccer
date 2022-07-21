@@ -1,0 +1,12 @@
+/* pages/user/list.wxss */
+.user_list {
+  height: 80vh;
+}
+
+.scroll1 {
+  height: 65vh;
+}
+
+.scroll2 {
+  height: 77vh;
+}

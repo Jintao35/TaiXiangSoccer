@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "mp-toptips": "weui-miniprogram/toptips/toptips",
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
+    "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell",
+    "tabBar":"../../components/navBar/navBar"
+  }
+}

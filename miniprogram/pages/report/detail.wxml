@@ -1,0 +1,30 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-cells>
+      <mp-form id="form">
+        <mp-cell title="{{playerName}}" prop="year" title="选择赛季" ext-class="">
+          <picker data-field="yearIndex" bindchange="bindPickerChange" value="{{yearIndex}}" range="{{lstYear}}">
+            <view class="weui-input">
+              {{lstYear[yearIndex]}}
+            </view>
+          </picker>
+        </mp-cell>
+      </mp-form>
+      <block wx:for="{{lstMatch}}" wx:key="index">
+        <mp-cell data-item="{{item}}" footer="{{item.pmvp?'MVP':''}}" bindtap="bindCellClick">
+          <view slot="title" class="list-title">
+            <text wx:if="{{item.goal > item.lose}}" class="bg color9">胜</text>
+            <text wx:elif="{{item.goal < item.lose}}" class="bg color5">负</text>
+            <text wx:else class="bg color7">平</text>
+          </view>
+          <view class="match-title">
+            {{item.goal}} : {{item.lose}} {{item.enemy}}
+            <block wx:if="{{item.passist>0}}">助攻{{item.passist}}</block>
+            <block wx:if="{{item.pgoal>0}}">进球{{item.pgoal}}</block>
+            <view class="match-memo">{{item.strTime}} {{item.stadium}}</view>
+          </view>
+        </mp-cell>
+      </block>
+    </mp-cells>
+  </view>
+</view>

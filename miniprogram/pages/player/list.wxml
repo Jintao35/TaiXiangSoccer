@@ -1,0 +1,52 @@
+<!-- 3_1队员管理 -->
+<tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-cells wx:if="{{tabIndex === 0}}">
+      <block wx:for="{{lstActivePlayer}}" wx:key="index">
+        <mp-cell data-item="{{item}}" bindtap="bindCellClick" footer="{{item.age}}岁">
+          <mp-badge wx:if="{{item.role === 1}}" content="{{item.roleName}}" class="cell-badge" />
+          <mp-badge wx:elif="{{item.role === 2}}" content="{{item.roleName}}" class="cell-badge" />
+          <view slot="title" class="list-title">
+            <image class="pic" src="{{item.pic}}" />
+          </view>
+          <view class="cell-title">{{item.no}}.{{item.name}}</view>
+          <view class="cell-memo">{{item.positions}}</view>
+
+          <!-- <view class="weui-cell weui-cell_example">
+            <view class="weui-cell__hd">
+            </view>
+            <view class="weui-cell__bd">
+              <view class="weui-cell">
+                {{item.no}}.{{item.name}}
+              </view>
+              <view class="weui-cell">
+                {{item.positions}}
+              </view>
+            </view>
+          </view> -->
+        </mp-cell>
+      </block>
+    </mp-cells>
+    <mp-cells wx:else>
+      <block wx:for="{{lstRetirePlayer}}" wx:key="index">
+        <mp-cell data-item="{{item}}" bindtap="bindCellClick" footer="{{item.age}}岁">
+          <mp-badge wx:if="{{item.role === 1}}" content="{{item.roleName}}" class="cell-badge" />
+          <mp-badge wx:elif="{{item.role === 2}}" content="{{item.roleName}}" class="cell-badge" />
+          <view slot="title" class="list-title">
+            <image class="pic" src="{{item.pic}}" />
+          </view>
+          <view class="cell-title">{{item.no}}.{{item.name}}</view>
+          <view class="cell-memo">{{item.positions}}</view>
+        </mp-cell>
+      </block>
+    </mp-cells>
+  </view>
+</view>
+<mp-actionSheet bindactiontap="btnClick" show="{{showActionsheet}}" actions="{{lstButton}}" title="{{actionSheetTitle}}">
+</mp-actionSheet>
+<mp-dialog title="{{player.no}}.{{player.name}}" show="{{showDialog}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <view class="bigPic">
+    <image src="{{player.pic}}" />
+  </view>
+</mp-dialog>

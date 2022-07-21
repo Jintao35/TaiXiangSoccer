@@ -1,0 +1,72 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-form id="form">
+      <mp-cells title="查询条件">
+        <mp-cell prop="start" title="时间范围" ext-class="">
+          <view style="float:left;">
+            <picker mode="multiSelector" data-field="startIndex" bindchange="bindYmPickerChange" bindcolumnchange="bindYmPickerColumnChange" value="{{startIndex}}" range="{{lstYyyyMm}}">
+              {{lstYyyyMm[0][startIndex[0]]}}年 {{lstYyyyMm[1][startIndex[1]]}}月
+            </picker>
+          </view>
+          <view>
+            <picker mode="multiSelector" data-field="endIndex" bindchange="bindYmPickerChange" bindcolumnchange="bindYmPickerColumnChange" value="{{endIndex}}" range="{{lstYyyyMm}}">
+              ~ {{lstYyyyMm[0][endIndex[0]]}}年 {{lstYyyyMm[1][endIndex[1]]}}月
+            </picker>
+          </view>
+        </mp-cell>
+        <mp-cell prop="enemy" title="对手名称" ext-class="weui-cell_vcode">
+          <input bindinput="formInputChange" data-field="enemy" class="weui-input" maxlength="20" placeholder="选填" />
+          <view slot="footer" bindtap="submitForm" class="weui-vcode-btn">查询</view>
+        </mp-cell>
+      </mp-cells>
+    </mp-form>
+    <mp-cells title="统计结果">
+      <view class="table">
+        <view class="weui-grids">
+          <view class="weui-grid">总场次</view>
+          <view class="weui-grid">{{teamReport.match}}</view>
+          <view class="weui-grid">胜率</view>
+          <view class="weui-grid">{{teamReport.shenglv}}%</view>
+        </view>
+        <view class="weui-grids">
+          <view class="weui-grid">胜</view>
+          <view class="weui-grid">{{teamReport.win}}</view>
+          <view class="weui-grid">负</view>
+          <view class="weui-grid">{{teamReport.lost}}</view>
+        </view>
+        <view class="weui-grids">
+          <view class="weui-grid">平</view>
+          <view class="weui-grid">{{teamReport.draw}}</view>
+          <view class="weui-grid">净胜球</view>
+          <view class="weui-grid">{{teamReport.difference}}</view>
+        </view>
+        <view class="weui-grids">
+          <view class="weui-grid">进球总数</view>
+          <view class="weui-grid">{{teamReport.goal}}</view>
+          <view class="weui-grid">失球总数</view>
+          <view class="weui-grid">{{teamReport.lose}}</view>
+        </view>
+        <view class="weui-grids">
+          <view class="weui-grid">场均进球</view>
+          <view class="weui-grid">{{teamReport.goalAvg}}</view>
+          <view class="weui-grid">场均失球</view>
+          <view class="weui-grid">{{teamReport.loseAvg}}</view>
+        </view>
+        <view wx:if="{{reportFlag === true}}" class="weui-grids">
+          <view class="weui-grid">入队人数</view>
+          <view class="weui-grid">{{teamReport.join}}</view>
+          <view class="weui-grid">离队人数</view>
+          <view class="weui-grid">{{teamReport.leave}}</view>
+        </view>
+      </view>
+    </mp-cells>
+    <mp-cells wx:if="{{reportFlag === false}}" title="交手情况">
+      <mp-cell wx:for="{{lstMatch}}" wx:for-item="item" wx:key="index" ext-class="weui-cell_vcode">
+        <view class="weui-cell__hd weui-cell__bd_in-select-before">
+          {{item.strTime}} 太翔 {{item.goal}} : {{item.lose}} {{item.enemy}}
+        </view>
+        <view slot="footer" data-matchid="{{item._id}}" bindtap="bindMatchResultView" class="weui-vcode-btn">详情</view>
+      </mp-cell>
+    </mp-cells>
+  </view>
+</view>

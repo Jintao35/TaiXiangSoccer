@@ -1,0 +1,129 @@
+<!--pages/sofifa/sofifa.wxml-->
+<mp-toptips msg="{{error}}" type="error" show="{{error}}"></mp-toptips>
+<mp-toptips msg="{{info}}" type="info" show="{{info}}"></mp-toptips>
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+    <block wx:if="{{tabIndex===0}}">
+      <view class="weui-grids">
+        <view class="weui-grid weui-grid-40 bold {{sortField==='index'?'sort':''}}" data-field="index" bindtap="bindTheadClick">
+          队员<block wx:if="{{sortField==='index'}}">↑</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='pac'?'sort':''}}" data-field="pac" bindtap="bindTheadClick">
+          速度<block wx:if="{{sortField==='pac'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='sho'?'sort':''}}" data-field="sho" bindtap="bindTheadClick">
+          射门<block wx:if="{{sortField==='sho'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='pas'?'sort':''}}" data-field="pas" bindtap="bindTheadClick">
+          传球<block wx:if="{{sortField==='pas'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='position'?'sort':''}}" data-field="position" bindtap="bindTheadClick">
+          位置<block wx:if="{{sortField==='position'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='overallRating'?'sort':''}}" data-field="overallRating" bindtap="bindTheadClick">
+          能力<block wx:if="{{sortField==='overallRating'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='dri'?'sort':''}}" data-field="dri" bindtap="bindTheadClick">
+          盘带<block wx:if="{{sortField==='dri'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='def'?'sort':''}}" data-field="def" bindtap="bindTheadClick">
+          防守<block wx:if="{{sortField==='def'}}">↓</block>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='phy'?'sort':''}}" data-field="phy" bindtap="bindTheadClick">
+          力量<block wx:if="{{sortField==='phy'}}">↓</block>
+        </view>
+        <!-- <scroll-view class="scrollView" scroll-y="true"> -->
+          <view wx:for="{{sofifa.fifalist}}" wx:for-item="item" wx:key="index" data-item="{{item}}" bindtap="bindCellClick">
+            <view class="weui-grid weui-grid-40 {{index%2===0?'row0':''}}">{{item.player.no}}.{{item.player.name}}</view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='pac'?'sort':''}}">{{item.pac}}
+            </view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='sho'?'sort':''}}">{{item.sho}}
+            </view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='pas'?'sort':''}}">{{item.pas}}
+            </view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='position'?'sort':''}}">
+              {{item.position}}</view>
+            <view class="weui-grid weui-grid-20 bold {{index%2===0?'row0':''}} {{sortField==='overallRating'?'sort':''}}">
+              {{item.overallRating}}</view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='dri'?'sort':''}}">{{item.dri}}
+            </view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='def'?'sort':''}}">{{item.def}}
+            </view>
+            <view class="weui-grid weui-grid-20 {{index%2===0?'row0':''}} {{sortField==='phy'?'sort':''}}">{{item.phy}}
+            </view>
+          </view>
+        <!-- </scroll-view> -->
+      </view>
+    </block>
+    <block wx:elif="{{tabIndex===1}}">
+      <view class="weui-grids">
+        <view class="weui-grid weui-grid-40 bold {{sortField==='index'?'sort':''}}" data-field="index" bindtap="bindTheadClick">
+          队员<block wx:if="{{sortField==='index'}}">↑</block>
+        </view>
+        <view class="weui-grid weui-grid-40 bold">
+          <picker mode="multiSelector" bindcolumnchange="bindFieldPickerColumnChange" bindchange="bindFieldPickerChange" value="{{fieldIndex}}" range="{{cboField}}">
+            {{cboField[0][fieldIndex[0]]}}-{{cboField[1][fieldIndex[1]]}}
+          </picker>
+        </view>
+        <view class="weui-grid weui-grid-20 bold {{sortField==='before'?'sort':''}}" data-field="before" bindtap="bindTheadClick">
+          修改前<block wx:if="{{sortField==='before'}}">↓</block>
+        </view>
+        <!-- <scroll-view class="scrollView" scroll-y="true"> -->
+          <block wx:for="{{sofifa.fifalist}}" wx:for-item="item" wx:key="index">
+            <view class="weui-grid weui-grid-40">{{item.player.no}}.{{item.player.name}}</view>
+            <view class="weui-grid weui-grid-40">
+              <picker mode="multiSelector" bindchange="bindNumPickerChange" bindtap="bindNumPickerClick" data-playerid="{{item.playerid}}" value="{{numIndex}}" range="{{lstNum}}">{{item[modifyField]}}
+              </picker>
+            </view>
+            <view class="weui-grid weui-grid-20">{{item.before}}　</view>
+          </block>
+        <!-- </scroll-view> -->
+      </view>
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="default" bindtap="showDescription">
+          <mp-icon icon="info" type="field" color="rgba(255, 201, 64, 1)" size="20"></mp-icon>属性说明
+        </button>
+        <button class="weui-btn" type="primary" bindtap="saveModifyField">保存</button>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="weui-grids">
+        <view class="weui-grid2 bold">队员</view>
+        <view class="weui-grid2 bold">特性</view>
+        <!-- <scroll-view class="tbody" scroll-y="true"> -->
+          <block wx:for="{{sofifa.fifalist}}" wx:for-item="item" wx:key="index">
+            <view class="weui-grid2">{{item.player.no}}.{{item.player.name}}</view>
+            <view class="weui-grid2">　</view>
+          </block>
+        <!-- </scroll-view> -->
+      </view>
+    </block>
+  </view>
+</view>
+<mp-actionSheet bindactiontap="btnClick" show="{{showActionsheet}}" actions="{{lstButton}}" title="{{actionSheetTitle}}">
+</mp-actionSheet>
+<!-- 球员卡 -->
+<mp-dialog title="" show="{{showPlayerDialog}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <view style="background-size: cover;background-position: center;background-image: url('https://wx1.sinaimg.cn/large/008nJrvKly1h37qp7rd4mj30hw0p0mz4.jpg')">
+    <view class="weui-grids">
+      <view class="weui-grid" style="background-color:transparent;">
+        <view class="bold">{{fifa.overallRating}}</view>
+        <view class="bold">{{fifa.position}}</view>
+      </view>
+      <view class="weui-grid weui-grid-60 weui-pic-grid" style="background-color:transparent;background-image: url({{fifa.player.pic}})"></view>
+      <view class="weui-grid weui-grid-100" style="background-color:transparent;">{{fifa.player.no}} {{fifa.player.name}}</view>
+      <view class="weui-grid weui-grid-50" style="background-color:transparent;">{{fifa.pac}} 速度</view>
+      <view class="weui-grid weui-grid-50" style="background-color:transparent;">{{fifa.dri}} 盘带</view>
+      <view class="weui-grid weui-grid-50" style="background-color:transparent;">{{fifa.sho}} 射门</view>
+      <view class="weui-grid weui-grid-50" style="background-color:transparent;">{{fifa.def}} 防守</view>
+      <view class="weui-grid weui-grid-50" style="background-color:transparent;">{{fifa.pas}} 传球</view>
+      <view class="weui-grid weui-grid-50" style="background-color:transparent;">{{fifa.phy}} 力量</view>
+    </view>
+  </view>
+</mp-dialog>
+<!-- 属性说明 -->
+<mp-dialog title="{{modifyFieldName}}" show="{{showDescriptionDialog}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <view style='text-align: left;'>【官方解释】{{officialInterpretation}}</view>
+  <view style='text-align: left;'>【民间诠释】{{folkInterpretation}}</view>
+</mp-dialog>

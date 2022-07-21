@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-toptips": "weui-miniprogram/toptips/toptips",
+    "mp-dialog": "weui-miniprogram/dialog/dialog",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-form": "weui-miniprogram/form/form",
+    "mp-actionSheet": "weui-miniprogram/actionsheet/actionsheet",
+    "tabBar": "../../components/navBar/navBar"
+  }
+}

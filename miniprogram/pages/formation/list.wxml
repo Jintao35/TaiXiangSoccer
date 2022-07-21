@@ -1,0 +1,37 @@
+<!-- 5_2阵容安排 -->
+<tabBar class="tabbar" tabBar='{{lstTab}}' bind:switch_tabBar='bindSwitchTab'></tabBar>
+<view class="positions">
+  <image class="park" src="https://wx1.sinaimg.cn/large/008nJrvKly1guqiuu7d26j61i61buh1u02.jpg" />
+  <view class="row" wx:for="{{formation.quarterlist[tabIndex].squadlist}}" wx:for-item="row" wx:key="index">
+    <view class="cell" wx:for="{{row.lstCell}}" wx:for-item="cell" wx:key="index">
+      <view wx:if="{{cell.picked}}" class="position checked player {{cell.class}}" data-position="{{cell.name}}" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" data-playerid="{{cell.player._id}}" bindtap="bindPositionClick" style="background-image: url({{cell.player.pic}})">
+        <!-- <image class="pic" src="{{cell.player.pic}}" /> -->
+        <view class="playername">
+          {{cell.player.no}}{{cell.player.name}}
+        </view>
+      </view>
+      <view wx:elif="{{cell.checked}}" class="position checked {{cell.class}}" data-position="{{cell.name}}" data-row="{{row.rowIndex}}" data-cell="{{cell.cellIndex}}" bindtap="bindPositionClick">{{cell.name}}
+      </view>
+      <view wx:else class="position"><text>{{cell.name}}</text></view>
+    </view>
+  </view>
+</view>
+<view class="table">
+  首发{{formation.quarterlist[tabIndex].lineuplist.length}}/{{formation.quarterlist[tabIndex].people}}，轮换({{lstPlayer.length}})
+  <scroll-view class="scroll" scroll-y="true">
+    <mp-cells>
+      <mp-checkbox-group prop="radio" multi="{{false}}" bindchange="bindPlayerChange">
+        <mp-checkbox class="table-row" wx:for="{{lstPlayer}}" wx:key="value" label="{{item.no}}.{{item.name}} {{item.positions}}" value="{{item._id}}" checked="{{item.checked}}">
+        </mp-checkbox>
+      </mp-checkbox-group>
+    </mp-cells>
+  </scroll-view>
+</view>
+<view class="btn-sp-area">
+  <button type="warn" size="mini" class="btn-sp" bindtap="bindClear">全清</button>
+  <button type="default" size="mini" class="btn-sp" bindtap="bindReturn">重置</button>
+  <button type="primary" size="mini" class="btn-sp" bindtap="submitForm">保存</button>
+</view>
+<mp-dialog title="保存成功" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <icon class="icon-box-img" type="success" size="64"></icon>
+</mp-dialog>

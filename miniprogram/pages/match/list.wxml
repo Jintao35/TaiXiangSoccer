@@ -1,0 +1,43 @@
+<!-- 4_1比赛信息 -->
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+  <view class="page__bd">
+    <mp-cells>
+      <mp-form id="form">
+        <mp-cell prop="year" title="选择赛季" footer="共{{lstMatch.length}}场">
+          <picker data-field="yearIndex" bindchange="bindPickerChange" value="{{yearIndex}}" range="{{lstYear}}">
+            <view class="weui-input">
+              {{lstYear[yearIndex]}}
+            </view>
+          </picker>
+        </mp-cell>
+      </mp-form>
+      <block wx:for="{{lstMatch}}" wx:key="index">
+        <mp-cell data-item="{{item}}" bindtap="bindCellClick" footer="{{item.competition}}">
+          <block wx:if="{{item.status === 0}}">
+            <view slot="title" class="list-title">
+              <mp-icon wx:if="{{item.color1 === 'rgba(255, 255, 255)'}}" type="outline" icon="sticker" size="44"></mp-icon>
+              <mp-icon wx:else type="field" icon="sticker" color="{{item.color1}}" size="44"></mp-icon>
+            </view>
+            <view class="match-title">{{item.enemy}}</view>
+            <view class="match-memo">{{item.strTime}} {{item.stadium}} {{item.memo}}</view>
+          </block>
+          <block wx:else>
+            <view slot="title" class="list-title">
+              <text wx:if="{{item.goal > item.lose}}" class="bg color9">胜</text>
+              <text wx:elif="{{item.goal < item.lose}}" class="bg color5">负</text>
+              <text wx:else class="bg color7">平</text>
+            </view>
+            <view class="match-title">{{item.goal}} : {{item.lose}} {{item.enemy}}</view>
+            <view class="match-memo">{{item.strTime}} {{item.stadium}}</view>
+            <mp-badge wx:if="{{item.status === 1}}" content="{{item.statusName}}" class="cell-badge" />
+          </block>
+        </mp-cell>
+      </block>
+    </mp-cells>
+  </view>
+</view>
+<mp-actionSheet bindactiontap="btnClick" show="{{showActionsheet}}" actions="{{groups}}" title="{{actionSheetTitle}}">
+</mp-actionSheet>
+<mp-dialog title="提示" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+  <view>是否确定要执行统计？</view>
+</mp-dialog>

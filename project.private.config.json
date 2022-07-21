@@ -1,0 +1,9 @@
+{
+  "setting": {
+    "compileHotReLoad": true
+  },
+  "condition": {},
+  "description": "Project configuration file, more information: https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
+  "libVersion": "2.24.5",
+  "projectname": "TaiXiangSoccer"
+}
