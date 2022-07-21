@@ -1,0 +1,86 @@
+【if判断】if和else必须相邻
+<view wx:if="{{true}}">对</view>
+<view wx:elif="{{true}}">也对</view>
+<view wx:else>不对</view>
+
+<view wx:if="{{true}}">对</view>
+<view wx:elif="{{true}}">也对</view>
+<view wx:else>不对</view>
+
+<block wx:if="{{true}}">
+  <navigator url="/pages/demo/demo">跳转1</navigator>
+</block>
+<block wx:else>
+  <navigator url="/pages/demo/demo">跳转2</navigator>
+</block>
+
+
+
+【for循环】
+-- 针对字符串集合
+<view wx:for="{{lstStr}}" wx:key="*this">{{index}}{{item}}</view>
+<view wx:for="{{lstStr}}" wx:key="{{i}}" wx:for-index="i" wx:for-item="content">
+  {{i}}{{content}}
+</view>
+
+-- 针对对象集合
+<view wx:for="{{lstPlayer}}" wx:key="{{item.no}}">
+  <text>{{item.no}}</text>
+  <text>{{item.name}}</text>
+  <image src="{{item.pic}}" />
+</view>
+
+
+<view class="page">
+  <view class="page__hd">
+    <text class="page__title">image</text>
+    <text class="page__desc">图片</text>
+  </view>
+  <view class="page__bd">
+    <view class="section section_gap" wx:for="{{array}}" wx:for-item="item">
+      <view class="section__title">{{item.text}}</view>
+      <view class="section__ctn">
+        <image style="width: 200px; height: 200px; background-color: #eeeeee;" mode="{{item.mode}}" src="{{src}}"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+【json转string】
+let initJson = JSON.stringify(this.data.match.initlist);
+【string转json】
+let players = JSON.parse(options.players);
+
+
+
+
+        // // 现役球员列表
+        // wx.cloud.callFunction({
+        //   name: 'yun',
+        //   data: {
+        //     controller: 'player',
+        //     action: 'listByRetire',
+        //     data: {
+        //       pageIndex: 1,
+        //       pageSize: 100,
+        //       retire: false
+        //     }
+        //   }
+        // }).then(res => {
+        //   // 正确的执行结果
+        //   for (let index = 0; index < res.result.data.length; index++) {
+        //     const player = res.result.data[index];
+        //     if (lstInit.indexOf(player._id) > -1) {
+        //       player.checked = true;
+        //     }
+        //   }
+        //   this.setData({
+        //     lstAllPlayer: res.result.data
+        //   })
+        //   wx.hideLoading()
+        // }).catch(err => {
+        //   // 错误的执行结果
+        //   console.log(err)
+        //   wx.hideLoading()
+        // })
